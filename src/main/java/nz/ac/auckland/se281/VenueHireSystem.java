@@ -10,6 +10,7 @@ public class VenueHireSystem {
 
   public void printVenues() {
     // TODO implement this method
+
     System.out.println("There are no venues in the system. Please create a venue first.");
     
   }
@@ -17,6 +18,7 @@ public class VenueHireSystem {
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
     // TODO implement this method
+    System.out.println("Successfully created venue " + "'" + venueName + "' (" + venueCode + ").");
   }
 
   public void setSystemDate(String dateInput) {
