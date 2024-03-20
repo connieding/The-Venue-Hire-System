@@ -6,12 +6,13 @@ import nz.ac.auckland.se281.Types.FloralType;
 public class VenueHireSystem {
 
   public VenueHireSystem() { 
+
+    // declear fields
   }
 
   public void printVenues() {
     // TODO implement this method
-
-    System.out.println("There are no venues in the system. Please create a venue first.");
+    MessageCli.NO_VENUES.printMessage();
     
   }
 
@@ -20,12 +21,14 @@ public class VenueHireSystem {
     // TODO implement this method
 
     if (venueName == ""){
-      // Test if venueName is empty
-      System.out.println("Venue not created: venue name must not be empty.");
+      MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
+
     } else if (Integer.parseInt(capacityInput) < 0) {
-      System.out.println("Venue not created: capacity must be a positive number.");
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
+
     } else {
-      System.out.println("Successfully created venue " + "'" + venueName + "' (" + venueCode + ").");
+      MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
+
     }
   }
 
