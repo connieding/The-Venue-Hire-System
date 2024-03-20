@@ -22,6 +22,8 @@ public class VenueHireSystem {
     if (venueName == ""){
       // Test if venueName is empty
       System.out.println("Venue not created: venue name must not be empty.");
+    } else if (Integer.parseInt(capacityInput) < 0) {
+      System.out.println("Venue not created: capacity must be a positive number.");
     } else {
       System.out.println("Successfully created venue " + "'" + venueName + "' (" + venueCode + ").");
     }
