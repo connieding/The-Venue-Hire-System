@@ -18,7 +18,13 @@ public class VenueHireSystem {
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
     // TODO implement this method
-    System.out.println("Successfully created venue " + "'" + venueName + "' (" + venueCode + ").");
+
+    if (venueName == ""){
+      // Test if venueName is empty
+      System.out.println("Venue not created: venue name must not be empty.");
+    } else {
+      System.out.println("Successfully created venue " + "'" + venueName + "' (" + venueCode + ").");
+    }
   }
 
   public void setSystemDate(String dateInput) {
