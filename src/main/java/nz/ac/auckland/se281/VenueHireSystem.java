@@ -1,16 +1,26 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import nz.ac.auckland.se281.Types.CateringType;
 import nz.ac.auckland.se281.Types.FloralType;
 
 public class VenueHireSystem {
+  
+  private List<Venue> listOfVenues = new ArrayList<Venue>();
 
   public VenueHireSystem() {}
 
   public void printVenues() {
-    // TODO implement this method
-    MessageCli.NO_VENUES.printMessage();
-
+    //check how venues in the listofVenues if there is one venue and if there is 10 venues print something different
+    if (listOfVenues.size() > 0) {
+      if (listOfVenues.size() == 1) {
+        MessageCli.NUMBER_VENUES.printMessage("is", "one", "");
+        } 
+      } else{
+      MessageCli.NO_VENUES.printMessage();
+    }
   }
 
   public void createVenue(
@@ -27,6 +37,7 @@ public class VenueHireSystem {
       System.out.println("Venue not created: hire fee must be a number.");
       
     } else {
+      listOfVenues.add(new Venue(venueName, venueCode, Integer.parseInt(capacityInput), Integer.parseInt(hireFeeInput)));
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
 
     }
