@@ -5,15 +5,12 @@ import nz.ac.auckland.se281.Types.FloralType;
 
 public class VenueHireSystem {
 
-  public VenueHireSystem() { 
-
-    // declear fields
-  }
+  public VenueHireSystem() {}
 
   public void printVenues() {
     // TODO implement this method
     MessageCli.NO_VENUES.printMessage();
-    
+
   }
 
   public void createVenue(
@@ -26,6 +23,9 @@ public class VenueHireSystem {
     } else if (Integer.parseInt(capacityInput) < 0) {
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
 
+    } else if (hireFeeInput.matches("[0-9]+") == false){
+      System.out.println("Venue not created: hire fee must be a number.");
+      
     } else {
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
 
