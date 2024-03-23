@@ -46,11 +46,25 @@ public class VenueHireSystem {
 
     } else if (hireFeeInput.matches("[0-9]+") == false){
       System.out.println("Venue not created: hire fee must be a number.");
+
+      //create an else statement for when there is a venue with the same code
+    } else if (listOfVenues.size() > 0) {
+      for (int i = 0; i < listOfVenues.size(); i++) {
+        if (listOfVenues.get(i).getVenueCode().equals(venueCode)) {
+          // VENUE_NOT_CREATED_CODE_EXISTS("Venue not created: code '%s' is already used for '%s'.")
+          MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCode, listOfVenues.get(i).getVenueName());
+          MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(i).getVenueName(), listOfVenues.get(i).getVenueCode(), Integer.toString(listOfVenues.get(i).getCapacity()), Integer.toString(listOfVenues.get(i).getHireFee()), "TODO");
+          break;
+        } else {
+          listOfVenues.add(new Venue(venueName, venueCode, Integer.parseInt(capacityInput), Integer.parseInt(hireFeeInput)));
+          MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
+          break;
+        }
+      }
       
     } else {
       listOfVenues.add(new Venue(venueName, venueCode, Integer.parseInt(capacityInput), Integer.parseInt(hireFeeInput)));
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
-
     }
   }
 
