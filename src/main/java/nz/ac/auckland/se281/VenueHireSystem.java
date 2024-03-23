@@ -17,8 +17,19 @@ public class VenueHireSystem {
     if (listOfVenues.size() > 0) {
       if (listOfVenues.size() == 1) {
         MessageCli.NUMBER_VENUES.printMessage("is", "one", "");
-        } 
+        MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(0).getVenueName(), listOfVenues.get(0).getVenueName(), Integer.toString(listOfVenues.get(0).getCapacity()), Integer.toString(listOfVenues.get(0).getHireFee()), "TODO");
+
+      } else if (listOfVenues.size() == 10){
+        //NUMBER_VENUES("There %s %s venue%s in the system:"),
+        MessageCli.NUMBER_VENUES.printMessage("are", "10", "s");
+        // print out the venues in the list with MeaageCli VENUE_ENTRY("  * %s (%s) - %s people - $%s base hire fee. Next available on %s")
+        for (int i = 0; i < listOfVenues.size(); i++) {
+          MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(i).getVenueName(), listOfVenues.get(i).getVenueCode(), Integer.toString(listOfVenues.get(i).getCapacity()), Integer.toString(listOfVenues.get(i).getHireFee()), "TODO");
+        }
       } else{
+        MessageCli.NUMBER_VENUES.printMessage("are", Integer.toString(listOfVenues.size()), "s");
+      }
+    } else {
       MessageCli.NO_VENUES.printMessage();
     }
   }
