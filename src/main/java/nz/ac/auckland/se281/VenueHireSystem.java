@@ -44,25 +44,34 @@ public class VenueHireSystem {
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
+    
+    try { // check capacity is a numeric value
+      Integer.parseInt(capacityInput);
+    } catch(Exception e) {
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", "");
+      return;
+    }
 
-    if (venueName.trim().length() == 0) {
+    try{ // check hire fee is a numeric value
+      Integer.parseInt(hireFeeInput);
+    } catch(Exception e) {
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", "");
+      return;
+    }
+    
+    if (venueName.trim().length() == 0) { // check if venue name is empty
       MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
-      
-      // capacityInput must be a whole integer, positive, over zero and numberic/digits
-    } else if (Integer.parseInt(capacityInput) < 0) {
+    
+    } else if (Integer.parseInt(capacityInput) < 0 ) {  // check if capacity is a positive number
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
 
-      //Hire_Fee must be a whole integer, positive, over zero, numeric/digits
-    } else if (hireFeeInput.matches("[0-9]+") == false){
-      System.out.println("Venue not created: hire fee must be a number.");
+    } else if (Integer.parseInt(hireFeeInput) < 0) {  // check if hire fee is a positive number
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", " positive");
 
-      //venue code must be unique across all other veune codes in the system.
-    } else if (listOfVenues.size() > 0) {
+    } else if (listOfVenues.size() > 0) { // check if venue code already exists
       for (int i = 0; i < listOfVenues.size(); i++) {
         if (listOfVenues.get(i).getVenueCode().equals(venueCode)) {
-          // VENUE_NOT_CREATED_CODE_EXISTS("Venue not created: code '%s' is already used for '%s'.")
           MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCode, listOfVenues.get(i).getVenueName());
-          MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(i).getVenueName(), listOfVenues.get(i).getVenueCode(), Integer.toString(listOfVenues.get(i).getCapacity()), Integer.toString(listOfVenues.get(i).getHireFee()), "TODO");
           break;
         } else {
           listOfVenues.add(new Venue(venueName, venueCode, Integer.parseInt(capacityInput), Integer.parseInt(hireFeeInput)));
@@ -71,7 +80,7 @@ public class VenueHireSystem {
         }
       }
       
-    } else {
+    } else { // Add venue to list
       listOfVenues.add(new Venue(venueName, venueCode, Integer.parseInt(capacityInput), Integer.parseInt(hireFeeInput)));
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
     }
