@@ -44,8 +44,8 @@ public class VenueHireSystem {
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
-    //venue name cannot be empty '' or ' '
-    if (venueName == ""){
+
+    if (venueName.trim().length() == 0) {
       MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
       
       // capacityInput must be a whole integer, positive, over zero and numberic/digits
