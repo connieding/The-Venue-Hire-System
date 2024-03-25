@@ -9,26 +9,34 @@ import nz.ac.auckland.se281.Types.FloralType;
 public class VenueHireSystem {
   
   private List<Venue> listOfVenues = new ArrayList<Venue>();
+  private String[] numbers = {"two", "three", "four", "five", "six", "seven", "eight", "nine"};
 
   public VenueHireSystem() {}
 
   public void printVenues() {
-    //check how venues in the listofVenues if there is one venue and if there is 10 venues print something different
     if (listOfVenues.size() > 0) {
       if (listOfVenues.size() == 1) {
         MessageCli.NUMBER_VENUES.printMessage("is", "one", "");
-        MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(0).getVenueName(), listOfVenues.get(0).getVenueName(), Integer.toString(listOfVenues.get(0).getCapacity()), Integer.toString(listOfVenues.get(0).getHireFee()), "TODO");
-
-      } else if (listOfVenues.size() == 10){
-        //NUMBER_VENUES("There %s %s venue%s in the system:"),
-        MessageCli.NUMBER_VENUES.printMessage("are", "10", "s");
-        // print out the venues in the list with MeaageCli VENUE_ENTRY("  * %s (%s) - %s people - $%s base hire fee. Next available on %s")
+        MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(0).getVenueName(), listOfVenues.get(0).getVenueCode(), Integer.toString(listOfVenues.get(0).getCapacity()), Integer.toString(listOfVenues.get(0).getHireFee()), "TODO");
+      
+      } else if (listOfVenues.size() > 1 && listOfVenues.size() < 10) {
+        MessageCli.NUMBER_VENUES.printMessage("are", numbers[listOfVenues.size() - 2], "s");
         for (int i = 0; i < listOfVenues.size(); i++) {
           MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(i).getVenueName(), listOfVenues.get(i).getVenueCode(), Integer.toString(listOfVenues.get(i).getCapacity()), Integer.toString(listOfVenues.get(i).getHireFee()), "TODO");
         }
-      } else{
+
+      } else if (listOfVenues.size() == 10){
+        MessageCli.NUMBER_VENUES.printMessage("are", "10", "s");
+        for (int i = 0; i < listOfVenues.size(); i++) {
+          MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(i).getVenueName(), listOfVenues.get(i).getVenueCode(), Integer.toString(listOfVenues.get(i).getCapacity()), Integer.toString(listOfVenues.get(i).getHireFee()), "TODO");
+        }
+
+      } else {
         MessageCli.NUMBER_VENUES.printMessage("are", Integer.toString(listOfVenues.size()), "s");
-      }
+        for (int i = 0; i < listOfVenues.size(); i++) {
+          MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(i).getVenueName(), listOfVenues.get(i).getVenueCode(), Integer.toString(listOfVenues.get(i).getCapacity()), Integer.toString(listOfVenues.get(i).getHireFee()), "TODO");
+        }
+      } 
     } else {
       MessageCli.NO_VENUES.printMessage();
     }
@@ -36,18 +44,19 @@ public class VenueHireSystem {
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
-    // TODO implement this method
-
+    //venue name cannot be empty '' or ' '
     if (venueName == ""){
       MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
-
+      
+      // capacityInput must be a whole integer, positive, over zero and numberic/digits
     } else if (Integer.parseInt(capacityInput) < 0) {
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
 
+      //Hire_Fee must be a whole integer, positive, over zero, numeric/digits
     } else if (hireFeeInput.matches("[0-9]+") == false){
       System.out.println("Venue not created: hire fee must be a number.");
 
-      //create an else statement for when there is a venue with the same code
+      //venue code must be unique across all other veune codes in the system.
     } else if (listOfVenues.size() > 0) {
       for (int i = 0; i < listOfVenues.size(); i++) {
         if (listOfVenues.get(i).getVenueCode().equals(venueCode)) {
