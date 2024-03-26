@@ -72,13 +72,11 @@ public class VenueHireSystem {
       for (int i = 0; i < listOfVenues.size(); i++) {
         if (listOfVenues.get(i).getVenueCode().equals(venueCode)) {
           MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCode, listOfVenues.get(i).getVenueName());
-          break;
-        } else {
-          listOfVenues.add(new Venue(venueName, venueCode, Integer.parseInt(capacityInput), Integer.parseInt(hireFeeInput)));
-          MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
-          break;
+          return;
         }
       }
+      listOfVenues.add(new Venue(venueName, venueCode, Integer.parseInt(capacityInput), Integer.parseInt(hireFeeInput)));
+      MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
       
     } else { // Add venue to list
       listOfVenues.add(new Venue(venueName, venueCode, Integer.parseInt(capacityInput), Integer.parseInt(hireFeeInput)));

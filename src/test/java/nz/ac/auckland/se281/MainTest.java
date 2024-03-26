@@ -760,7 +760,7 @@ public class MainTest {
       assertContains("Luxurious Legacy Hall (LLH) - 800 people - $2500 base hire fee");
 
       assertDoesNotContain("There is", true);
-      assertDoesNotContain("ten venues", true);
+      assertDoesNotContain("9 venues", true);
     }
 
     @Test
@@ -772,7 +772,7 @@ public class MainTest {
     }
 
     @Test
-    public void T4_06_not_whole_number_capacity() throws Exception {
+    public void T4_06_not_whole_number_hirefee() throws Exception {
       runCommands(CREATE_VENUE, "'Frugal Fiesta Hall'", "FFH", "80", "250.8");
 
       assertContains("Venue not created: hire fee must be a number.");
@@ -857,11 +857,11 @@ public class MainTest {
           "2500", //
           CREATE_VENUE,
           "'Royal Regal Venue'",
-          "RRV",
+          "RVV",
           "999",
           "1000", //
           PRINT_VENUES);
-
+    
       assertContains("There are 11 venues in the system:");
       assertContains("Frugal Fiesta Hall (FFH) - 80 people - $150 base hire fee");
       assertContains("Comfy Corner Events Centre (CCEC) - 120 people - $500 base hire fee");
@@ -873,9 +873,86 @@ public class MainTest {
       assertContains("Exclusive Elegance Venue (EEV) - 350 people - $1500 base hire fee");
       assertContains("Luxurious Legacy Hall (LLH) - 800 people - $2500 base hire fee");
       assertContains("Majestic Monarch Mansion (MMM) - 1000 people - $2500 base hire fee");
-      assertContains("Royal Regal Venue (RRV) - 999 people - $1000 base hire fee");
+      assertContains("Royal Regal Venue (RVV) - 999 people - $1000 base hire fee");
       assertDoesNotContain("There is", true);
       assertDoesNotContain("eleven venues", true);
+    }
+
+    @Test
+    public void T4_09_check_no_duplicate_venueCode() throws Exception {
+      runCommands(
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFH",
+          "80",
+          "150", //
+          CREATE_VENUE,
+          "'Comfy Corner Events Centre'",
+          "CCEC",
+          "120",
+          "500", //
+          CREATE_VENUE,
+          "'Cozy Comforts Venue'",
+          "CCV",
+          "200",
+          "500", //
+          CREATE_VENUE,
+          "'Charming Charm Hall'",
+          "CCH",
+          "220",
+          "500", //
+          CREATE_VENUE,
+          "'Refined Radiance Venue'",
+          "RRV",
+          "200",
+          "500", //
+          CREATE_VENUE,
+          "'Classy Celebration Venue'",
+          "TGB",
+          "150",
+          "1000", //
+          CREATE_VENUE,
+          "'Grand Gala Gardens'",
+          "GGG",
+          "260",
+          "1500", //
+          CREATE_VENUE,
+          "'Exclusive Elegance Venue'",
+          "EEV",
+          "350",
+          "1500", //
+          CREATE_VENUE,
+          "'Luxurious Legacy Hall'",
+          "LLH",
+          "800",
+          "2500", //
+          CREATE_VENUE,
+          "'Majestic Monarch Mansion'",
+          "MMM",
+          "1000",
+          "2500", //
+          CREATE_VENUE,
+          "'Royal Regal Venue'",
+          "RRV",
+          "999",
+          "1000", //
+          PRINT_VENUES);
+      
+      assertContains("Venue not created: code 'RRV' is already used for 'Refined Radiance Venue'.");
+    
+      assertContains("There are 10 venues in the system:");
+      assertContains("Frugal Fiesta Hall (FFH) - 80 people - $150 base hire fee");
+      assertContains("Comfy Corner Events Centre (CCEC) - 120 people - $500 base hire fee");
+      assertContains("Cozy Comforts Venue (CCV) - 200 people - $500 base hire fee");
+      assertContains("Charming Charm Hall (CCH) - 220 people - $500 base hire fee");
+      assertContains("Refined Radiance Venue (RRV) - 200 people - $500 base hire fee");
+      assertContains("Classy Celebration Venue (TGB) - 150 people - $1000 base hire fee");
+      assertContains("Grand Gala Gardens (GGG) - 260 people - $1500 base hire fee");
+      assertContains("Exclusive Elegance Venue (EEV) - 350 people - $1500 base hire fee");
+      assertContains("Luxurious Legacy Hall (LLH) - 800 people - $2500 base hire fee");
+      assertContains("Majestic Monarch Mansion (MMM) - 1000 people - $2500 base hire fee");
+      assertDoesNotContain("There is", true);
+      assertDoesNotContain("ten venues", true);
     }
   }
 
