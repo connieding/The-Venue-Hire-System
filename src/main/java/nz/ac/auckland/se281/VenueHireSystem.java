@@ -62,10 +62,10 @@ public class VenueHireSystem {
     if (venueName.trim().length() == 0) { // check if venue name is empty
       MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
     
-    } else if (Integer.parseInt(capacityInput) < 0 ) {  // check if capacity is a positive number
+    } else if (Integer.parseInt(capacityInput) <= 0 ) {  // check if capacity is a positive number
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
 
-    } else if (Integer.parseInt(hireFeeInput) < 0) {  // check if hire fee is a positive number
+    } else if (Integer.parseInt(hireFeeInput) <= 0) {  // check if hire fee is a positive number
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", " positive");
 
     } else if (listOfVenues.size() > 0) { // check if venue code already exists
