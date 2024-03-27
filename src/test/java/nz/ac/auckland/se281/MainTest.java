@@ -954,6 +954,22 @@ public class MainTest {
       assertDoesNotContain("There is", true);
       assertDoesNotContain("ten venues", true);
     }
+
+    @Test
+    public void T4_010_not_zero_capacity() throws Exception {
+      runCommands(CREATE_VENUE, "'Frugal Fiesta Hall'", "FFH", "0", "250");
+
+      assertContains("Venue not created: capacity must be a positive number.");
+      assertDoesNotContain("Successfully created venue", true);
+    }
+
+    @Test
+    public void T4_011_not_zero_hirefee() throws Exception {
+      runCommands(CREATE_VENUE, "'Frugal Fiesta Hall'", "FFH", "150", "0");
+
+      assertContains("Venue not created: hire fee must be a positive number.");
+      assertDoesNotContain("Successfully created venue", true);
+    }
   }
 
   private static final Object[] CREATE_NINE_VENUES =
