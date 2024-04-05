@@ -11,6 +11,7 @@ public class VenueHireSystem {
   private List<Venue> listOfVenues = new ArrayList<Venue>();
   private String[] numbers = {"two", "three", "four", "five", "six", "seven", "eight", "nine"};
   private String systemDate;
+  private boolean codeExists = false;
 
   public VenueHireSystem() {}
 
@@ -102,6 +103,10 @@ public class VenueHireSystem {
   public void makeBooking(String[] options) {
     if (systemDate == null) {
       MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
+      return;
+    } else if (listOfVenues.size() == 0) {
+      MessageCli.BOOKING_NOT_MADE_NO_VENUES.printMessage();
+      return;
     }
   }
 
