@@ -1116,6 +1116,23 @@ public class MainTest {
       assertContains("Venue not created: hire fee must be a positive number.");
       assertDoesNotContain("Successfully created venue", true);
     }
+
+    @Test
+    public void T4_012_venuecode_exists() throws Exception {
+      runCommands(
+        CREATE_VENUE,
+        "'Frugal Fiesta Hall'",
+        "FFC",
+        "120",
+        "500", //
+        SET_DATE,
+        "26/02/2024", //
+        MAKE_BOOKING,
+        options("FFH", "27/02/2024", "client001@email.com", "70"));
+
+    assertContains("Booking not made: there is no venue with code 'FFH'.");
+    }
+
   }
 
   private static final Object[] CREATE_NINE_VENUES =

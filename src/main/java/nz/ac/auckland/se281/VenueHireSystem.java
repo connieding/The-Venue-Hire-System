@@ -101,11 +101,22 @@ public class VenueHireSystem {
   }
 
   public void makeBooking(String[] options) {
-    if (systemDate == null) {
+    if (systemDate == null) { // check if system date is set
       MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
       return;
-    } else if (listOfVenues.size() == 0) {
+    } else if (listOfVenues.size() == 0) { // check if there are venues in the system
       MessageCli.BOOKING_NOT_MADE_NO_VENUES.printMessage();
+      return;
+    }
+
+    // check if venue code exists
+    for (int i = 0; i < listOfVenues.size(); i++) {
+      if (listOfVenues.get(i).getVenueCode().equals(options[0])) {
+        codeExists = true;
+      }
+    }
+    if (!codeExists) {
+      MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(options[0]);
       return;
     }
   }
