@@ -12,6 +12,7 @@ public class VenueHireSystem {
   private String[] numbers = {"two", "three", "four", "five", "six", "seven", "eight", "nine"};
   private String systemDate;
   private boolean codeExists = false;
+  private String nameOfVenue;
 
   public VenueHireSystem() {}
 
@@ -112,6 +113,7 @@ public class VenueHireSystem {
     // check if venue code exists
     for (int i = 0; i < listOfVenues.size(); i++) {
       if (listOfVenues.get(i).getVenueCode().equals(options[0])) {
+        nameOfVenue = listOfVenues.get(i).getVenueName();
         codeExists = true;
       }
     }
@@ -119,6 +121,10 @@ public class VenueHireSystem {
       MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(options[0]);
       return;
     }
+
+    MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(BookingReferenceGenerator.generateBookingReference(), nameOfVenue, options[1], options[3]);
+
+
   }
 
   public void printBookings(String venueCode) {

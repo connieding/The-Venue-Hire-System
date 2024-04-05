@@ -1118,7 +1118,7 @@ public class MainTest {
     }
 
     @Test
-    public void T4_012_venuecode_exists() throws Exception {
+    public void T5_01_venuecode_exists() throws Exception {
       runCommands(
         CREATE_VENUE,
         "'Frugal Fiesta Hall'",
