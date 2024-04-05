@@ -1133,6 +1133,56 @@ public class MainTest {
     assertContains("Booking not made: there is no venue with code 'FFH'.");
     }
 
+    @Test
+    public void T5_02_venueDate_past() throws Exception {
+      runCommands(
+        CREATE_VENUE,
+        "'Frugal Fiesta Hall'",
+        "FFH",
+        "120",
+        "500", //
+        SET_DATE,
+        "26/02/2024", //
+        MAKE_BOOKING,
+        options("FFH", "25/02/2024", "client001@email.com", "70"));
+
+    assertContains("Booking not made: '25/02/2024' is in the past (system date is 26/02/2024).");
+    }
+
+    @Test
+    public void T5_03_venueDate_sameDay() throws Exception {
+      runCommands(
+        CREATE_VENUE,
+        "'Frugal Fiesta Hall'",
+        "FFH",
+        "120",
+        "500", //
+        SET_DATE,
+        "26/02/2024", //
+        MAKE_BOOKING,
+        options("FFH", "26/02/2024", "client001@email.com", "70"));
+
+    assertContains("Successfully created booking 'HUD14D8O' for 'Frugal Fiesta Hall' on 26/02/2024 for 70 people.");
+    assertDoesNotContain("Booking not made: '26/02/2024' is in the past (system date is 26/02/2024).");
+    }
+
+    @Test
+    public void T5_04_venueDate_laterDay() throws Exception {
+      runCommands(
+        CREATE_VENUE,
+        "'Frugal Fiesta Hall'",
+        "FFH",
+        "120",
+        "500", //
+        SET_DATE,
+        "26/02/2024", //
+        MAKE_BOOKING,
+        options("FFH", "26/03/2024", "client001@email.com", "70"));
+        
+    assertContains("Successfully created booking 'HUD14D8O' for 'Frugal Fiesta Hall' on 26/03/2024 for 70 people.");
+    assertDoesNotContain("Booking not made: '26/03/2024' is in the past (system date is 26/02/2024).");
+    }
+
   }
 
   private static final Object[] CREATE_NINE_VENUES =

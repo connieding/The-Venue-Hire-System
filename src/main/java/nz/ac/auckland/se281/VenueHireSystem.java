@@ -132,6 +132,29 @@ public class VenueHireSystem {
       }
     }
 
+    //check the date is not in the past
+    String date = options[1];
+    String[] dateParts = date.split("/");
+    String venueDay = dateParts[0];  
+    String venueMonth = dateParts[1]; 
+    String venueYear = dateParts[2];
+
+    String[] systemDateParts = systemDate.split("/");
+    String systemDay = systemDateParts[0];
+    String systemMonth = systemDateParts[1];
+    String systemYear = systemDateParts[2];
+
+    if (Integer.parseInt(venueYear) < Integer.parseInt(systemYear)) {
+      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
+      return;
+    } else if (Integer.parseInt(venueMonth) < Integer.parseInt(systemMonth)) {
+      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
+      return;
+    } else if (Integer.parseInt(venueDay) < Integer.parseInt(systemDay)) {
+      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
+      return;
+    }
+
     //Successfully create booking
     bookingReference = BookingReferenceGenerator.generateBookingReference();
     MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(bookingReference, nameOfVenue, options[1], options[3]);
