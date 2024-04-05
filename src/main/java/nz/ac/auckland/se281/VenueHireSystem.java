@@ -9,10 +9,12 @@ import nz.ac.auckland.se281.Types.FloralType;
 public class VenueHireSystem {
   
   private List<Venue> listOfVenues = new ArrayList<Venue>();
+  private List<Booking> listOfBookings = new ArrayList<Booking>();
   private String[] numbers = {"two", "three", "four", "five", "six", "seven", "eight", "nine"};
   private String systemDate;
   private boolean codeExists = false;
   private String nameOfVenue;
+  private String bookingReference;
 
   public VenueHireSystem() {}
 
@@ -122,9 +124,18 @@ public class VenueHireSystem {
       return;
     }
 
-    MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(BookingReferenceGenerator.generateBookingReference(), nameOfVenue, options[1], options[3]);
+    // check if venue is already booked
+    for (int i = 0; i < listOfBookings.size(); i++) {
+      if (listOfBookings.get(i).getBookingDate().equals(options[1])) {
+        MessageCli.BOOKING_NOT_MADE_VENUE_ALREADY_BOOKED.printMessage(listOfBookings.get(i).getVenueName(), options[1]);
+        return;
+      }
+    }
 
-
+    //Successfully create booking
+    bookingReference = BookingReferenceGenerator.generateBookingReference();
+    MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(bookingReference, nameOfVenue, options[1], options[3]);
+    listOfBookings.add(new Booking(options[0], bookingReference, nameOfVenue, options[1], options[2], options[3]));
   }
 
   public void printBookings(String venueCode) {
