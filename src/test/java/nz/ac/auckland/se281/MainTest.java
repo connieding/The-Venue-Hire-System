@@ -1183,6 +1183,40 @@ public class MainTest {
     assertDoesNotContain("Booking not made: '26/03/2024' is in the past (system date is 26/02/2024).");
     }
 
+    @Test
+    public void T5_05_make_two_booking() throws Exception {
+      runCommands(
+          unpack(
+              CREATE_TEN_VENUES,
+              SET_DATE,
+              "03/02/2024", //
+              MAKE_BOOKING,
+              options("GGG", "03/02/2024", "client001@email.com", "230"),
+              MAKE_BOOKING,
+              options("FFH", "04/02/2024", "client002@email.com", "250")));
+
+      assertContains("Successfully created booking 'HUD14D8O'");
+      assertContains("Successfully created booking 'ZP4HRCZ4'");
+      assertDoesNotContain("Booking not made", true);
+    }
+
+    @Test
+    public void T5_06_make_two_booking_sameday() throws Exception {
+      runCommands(
+          unpack(
+              CREATE_TEN_VENUES,
+              SET_DATE,
+              "03/02/2024", //
+              MAKE_BOOKING,
+              options("GGG", "03/02/2024", "client001@email.com", "230"),
+              MAKE_BOOKING,
+              options("FFH", "03/02/2024", "client002@email.com", "250")));
+
+      assertContains("Successfully created booking 'HUD14D8O'");
+      assertDoesNotContain("Successfully created booking 'ZP4HRCZ4'");
+      assertContains("Booking not made: venue 'Grand Gala Gardens' is already booked on 03/02/2024.");
+    }
+
   }
 
   private static final Object[] CREATE_NINE_VENUES =
