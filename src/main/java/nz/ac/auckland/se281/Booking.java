@@ -26,5 +26,9 @@ public class Booking {
     return this.venueName;
   }
 
+  public Object getvenueCode() {
+    return this.venueCode;
+  }
+
 
 }

@@ -126,7 +126,7 @@ public class VenueHireSystem {
 
     // check if venue is already booked
     for (int i = 0; i < listOfBookings.size(); i++) {
-      if (listOfBookings.get(i).getBookingDate().equals(options[1])) {
+      if (listOfBookings.get(i).getvenueCode().equals(options[0]) && listOfBookings.get(i).getBookingDate().equals(options[1])) {
         MessageCli.BOOKING_NOT_MADE_VENUE_ALREADY_BOOKED.printMessage(listOfBookings.get(i).getVenueName(), options[1]);
         return;
       }

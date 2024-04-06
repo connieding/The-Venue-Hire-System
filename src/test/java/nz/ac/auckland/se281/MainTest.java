@@ -1195,13 +1195,30 @@ public class MainTest {
               MAKE_BOOKING,
               options("FFH", "04/02/2024", "client002@email.com", "250")));
 
-      assertContains("Successfully created booking 'HUD14D8O'");
-      assertContains("Successfully created booking 'ZP4HRCZ4'");
+      assertContains("Successfully created booking 'HUD14D8O' for 'Grand Gala Gardens' on 03/02/2024 for 230 people.");
+      assertContains("Successfully created booking 'ZP4HRCZ4' for 'Frugal Fiesta Hall' on 04/02/2024 for 250 people.");
       assertDoesNotContain("Booking not made", true);
     }
 
     @Test
-    public void T5_06_make_two_booking_sameday() throws Exception {
+    public void T5_06_make_two_booking_sameday_sameplace() throws Exception {
+      runCommands(
+          unpack(
+              CREATE_TEN_VENUES,
+              SET_DATE,
+              "03/02/2024", //
+              MAKE_BOOKING,
+              options("GGG", "03/02/2024", "client001@email.com", "230"),
+              MAKE_BOOKING,
+              options("GGG", "03/02/2024", "client002@email.com", "250")));
+
+      assertContains("Successfully created booking 'HUD14D8O' for 'Grand Gala Gardens' on 03/02/2024 for 230 people.");
+      assertDoesNotContain("Successfully created booking 'ZP4HRCZ4' for 'Grand Gala Gardens' on 03/02/2024 for 250 people.");
+      assertContains("Booking not made: venue 'Grand Gala Gardens' is already booked on 03/02/2024.");
+    }
+
+    @Test
+    public void T5_07_make_two_booking_sameday_diffplace() throws Exception {
       runCommands(
           unpack(
               CREATE_TEN_VENUES,
@@ -1212,9 +1229,9 @@ public class MainTest {
               MAKE_BOOKING,
               options("FFH", "03/02/2024", "client002@email.com", "250")));
 
-      assertContains("Successfully created booking 'HUD14D8O'");
-      assertDoesNotContain("Successfully created booking 'ZP4HRCZ4'");
-      assertContains("Booking not made: venue 'Grand Gala Gardens' is already booked on 03/02/2024.");
+      assertContains("Successfully created booking 'HUD14D8O' for 'Grand Gala Gardens' on 03/02/2024 for 230 people.");
+      assertContains("Successfully created booking 'ZP4HRCZ4' for 'Frugal Fiesta Hall' on 03/02/2024 for 250 people.");
+      assertDoesNotContain("Booking not made: venue 'Grand Gala Gardens' is already booked on 03/02/2024.");
     }
 
   }
