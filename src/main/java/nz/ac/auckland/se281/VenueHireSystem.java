@@ -15,6 +15,7 @@ public class VenueHireSystem {
   private boolean codeExists = false;
   private String nameOfVenue;
   private String bookingReference;
+  private String numberOfAttendees;
 
   public VenueHireSystem() {}
 
@@ -126,7 +127,7 @@ public class VenueHireSystem {
 
     // check if venue is already booked
     for (int i = 0; i < listOfBookings.size(); i++) {
-      if (listOfBookings.get(i).getvenueCode().equals(options[0]) && listOfBookings.get(i).getBookingDate().equals(options[1])) {
+      if (listOfBookings.get(i).getVenueCode().equals(options[0]) && listOfBookings.get(i).getBookingDate().equals(options[1])) {
         MessageCli.BOOKING_NOT_MADE_VENUE_ALREADY_BOOKED.printMessage(listOfBookings.get(i).getVenueName(), options[1]);
         return;
       }
@@ -155,10 +156,25 @@ public class VenueHireSystem {
       return;
     }
 
+    // check if number of attendees is greater than venue capacity
+    numberOfAttendees = options[3];
+    for (int i = 0; i < listOfVenues.size(); i++) {
+      if (listOfVenues.get(i).getVenueCode().equals(options[0])) {
+        if(Integer.parseInt(options[3]) > listOfVenues.get(i).getCapacity()) {
+          MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(options[3], String.valueOf(listOfVenues.get(i).getCapacity()), String.valueOf(listOfVenues.get(i).getCapacity()));
+          numberOfAttendees = String.valueOf(listOfVenues.get(i).getCapacity());
+          
+        } else if (Integer.parseInt(options[3]) < ((listOfVenues.get(i).getCapacity())/4)) {
+          MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(options[3], String.valueOf((listOfVenues.get(i).getCapacity())/4), String.valueOf(listOfVenues.get(i).getCapacity()));
+          numberOfAttendees = String.valueOf((listOfVenues.get(i).getCapacity())/4);
+        }
+      }
+    }
+
     //Successfully create booking
     bookingReference = BookingReferenceGenerator.generateBookingReference();
-    MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(bookingReference, nameOfVenue, options[1], options[3]);
-    listOfBookings.add(new Booking(options[0], bookingReference, nameOfVenue, options[1], options[2], options[3]));
+    MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(bookingReference, nameOfVenue, options[1], numberOfAttendees);
+    listOfBookings.add(new Booking(options[0], bookingReference, nameOfVenue, options[1], options[2], numberOfAttendees));
   }
 
   public void printBookings(String venueCode) {

@@ -1196,7 +1196,8 @@ public class MainTest {
               options("FFH", "04/02/2024", "client002@email.com", "250")));
 
       assertContains("Successfully created booking 'HUD14D8O' for 'Grand Gala Gardens' on 03/02/2024 for 230 people.");
-      assertContains("Successfully created booking 'ZP4HRCZ4' for 'Frugal Fiesta Hall' on 04/02/2024 for 250 people.");
+      assertContains("Number of attendees adjusted from 250 to 80, as the venue capacity is 80.");
+      assertContains("Successfully created booking 'ZP4HRCZ4' for 'Frugal Fiesta Hall' on 04/02/2024 for 80 people.");
       assertDoesNotContain("Booking not made", true);
     }
 
@@ -1227,10 +1228,10 @@ public class MainTest {
               MAKE_BOOKING,
               options("GGG", "03/02/2024", "client001@email.com", "230"),
               MAKE_BOOKING,
-              options("FFH", "03/02/2024", "client002@email.com", "250")));
+              options("FFH", "03/02/2024", "client002@email.com", "80")));
 
       assertContains("Successfully created booking 'HUD14D8O' for 'Grand Gala Gardens' on 03/02/2024 for 230 people.");
-      assertContains("Successfully created booking 'ZP4HRCZ4' for 'Frugal Fiesta Hall' on 03/02/2024 for 250 people.");
+      assertContains("Successfully created booking 'ZP4HRCZ4' for 'Frugal Fiesta Hall' on 03/02/2024 for 80 people.");
       assertDoesNotContain("Booking not made: venue 'Grand Gala Gardens' is already booked on 03/02/2024.");
     }
 
