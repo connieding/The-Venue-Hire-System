@@ -16,31 +16,90 @@ public class VenueHireSystem {
   private String nameOfVenue;
   private String bookingReference;
   private String numberOfAttendees;
+  private String tempDate;
+
 
   public VenueHireSystem() {}
 
   public void printVenues() {
+
     if (listOfVenues.size() > 0) {
-      if (listOfVenues.size() == 1) {
+      if (listOfVenues.size() == 1) { // one booking
+
         MessageCli.NUMBER_VENUES.printMessage("is", "one", "");
-        MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(0).getVenueName(), listOfVenues.get(0).getVenueCode(), Integer.toString(listOfVenues.get(0).getCapacity()), Integer.toString(listOfVenues.get(0).getHireFee()), "TODO");
+
+        tempDate = systemDate;
+        for (Booking booking : listOfBookings) { 
+          if (booking.getBookingDate().equals(tempDate) && listOfVenues.get(0).getVenueCode().equals(booking.getVenueCode())) {
+            tempDate = booking.getNextAvaliableDate();
+          }
+        }
+
+        MessageCli.VENUE_ENTRY.printMessage(
+          listOfVenues.get(0).getVenueName(), 
+          listOfVenues.get(0).getVenueCode(), 
+          Integer.toString(listOfVenues.get(0).getCapacity()), 
+          Integer.toString(listOfVenues.get(0).getHireFee()), 
+          "TODO");
       
-      } else if (listOfVenues.size() > 1 && listOfVenues.size() < 10) {
+      } else if (listOfVenues.size() > 1 && listOfVenues.size() < 10) { // 2-9 bookings
+
         MessageCli.NUMBER_VENUES.printMessage("are", numbers[listOfVenues.size() - 2], "s");
+
         for (int i = 0; i < listOfVenues.size(); i++) {
-          MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(i).getVenueName(), listOfVenues.get(i).getVenueCode(), Integer.toString(listOfVenues.get(i).getCapacity()), Integer.toString(listOfVenues.get(i).getHireFee()), "TODO");
+
+          tempDate = systemDate;
+          for (Booking booking : listOfBookings) { 
+            if (booking.getBookingDate().equals(tempDate) && listOfVenues.get(i).getVenueCode().equals(booking.getVenueCode())) {
+              tempDate = booking.getNextAvaliableDate();
+            }
+          }
+          MessageCli.VENUE_ENTRY.printMessage(
+            listOfVenues.get(i).getVenueName(), 
+            listOfVenues.get(i).getVenueCode(), 
+            Integer.toString(listOfVenues.get(i).getCapacity()), 
+            Integer.toString(listOfVenues.get(i).getHireFee()), 
+            "TODO");
         }
 
-      } else if (listOfVenues.size() == 10){
+      } else if (listOfVenues.size() == 10){ // 10 bookings
+
         MessageCli.NUMBER_VENUES.printMessage("are", "10", "s");
+
         for (int i = 0; i < listOfVenues.size(); i++) {
-          MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(i).getVenueName(), listOfVenues.get(i).getVenueCode(), Integer.toString(listOfVenues.get(i).getCapacity()), Integer.toString(listOfVenues.get(i).getHireFee()), "TODO");
+
+          tempDate = systemDate;
+          for (Booking booking : listOfBookings) { 
+            if (booking.getBookingDate().equals(tempDate) && listOfVenues.get(i).getVenueCode().equals(booking.getVenueCode())) {
+              tempDate = booking.getNextAvaliableDate();
+            }
+          }
+        
+          MessageCli.VENUE_ENTRY.printMessage(
+            listOfVenues.get(i).getVenueName(), 
+            listOfVenues.get(i).getVenueCode(), 
+            Integer.toString(listOfVenues.get(i).getCapacity()), 
+            Integer.toString(listOfVenues.get(i).getHireFee()), 
+            tempDate);
         }
 
-      } else {
+      } else { // more than 10 bookings
         MessageCli.NUMBER_VENUES.printMessage("are", Integer.toString(listOfVenues.size()), "s");
         for (int i = 0; i < listOfVenues.size(); i++) {
-          MessageCli.VENUE_ENTRY.printMessage(listOfVenues.get(i).getVenueName(), listOfVenues.get(i).getVenueCode(), Integer.toString(listOfVenues.get(i).getCapacity()), Integer.toString(listOfVenues.get(i).getHireFee()), "TODO");
+
+          tempDate = systemDate;
+          for (Booking booking : listOfBookings) { 
+            if (booking.getBookingDate().equals(tempDate) && listOfVenues.get(i).getVenueCode().equals(booking.getVenueCode())) {
+              tempDate = booking.getNextAvaliableDate();
+            }
+          }
+
+          MessageCli.VENUE_ENTRY.printMessage(
+            listOfVenues.get(i).getVenueName(), 
+            listOfVenues.get(i).getVenueCode(), 
+            Integer.toString(listOfVenues.get(i).getCapacity()), 
+            Integer.toString(listOfVenues.get(i).getHireFee()), 
+            tempDate);
         }
       } 
     } else {
@@ -92,7 +151,7 @@ public class VenueHireSystem {
 
   public void setSystemDate(String dateInput) {
     systemDate = dateInput;
-    MessageCli.DATE_SET.printMessage(dateInput);
+    MessageCli.DATE_SET.printMessage(dateInput);    
   }
 
   public void printSystemDate() {
@@ -170,15 +229,14 @@ public class VenueHireSystem {
         }
       }
     }
-
     //Successfully create booking
     bookingReference = BookingReferenceGenerator.generateBookingReference();
     MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(bookingReference, nameOfVenue, options[1], numberOfAttendees);
     listOfBookings.add(new Booking(options[0], bookingReference, nameOfVenue, options[1], options[2], numberOfAttendees));
+
   }
 
   public void printBookings(String venueCode) {
-    // TODO implement this method
   }
 
   public void addCateringService(String bookingReference, CateringType cateringType) {
