@@ -89,6 +89,8 @@ public class MainTest {
           "FFH",
           "80",
           "150", //
+          SET_DATE, 
+          "26/02/2024", //
           PRINT_VENUES);
 
       assertContains("There is one venue in the system:");
@@ -104,6 +106,8 @@ public class MainTest {
           "FFH",
           "80",
           "150", //
+          SET_DATE, 
+          "26/02/2024", //
           PRINT_VENUES);
 
       assertContains("There is one venue in the system:");
@@ -124,6 +128,8 @@ public class MainTest {
           "CCEC",
           "120",
           "250", //
+          SET_DATE, 
+          "26/02/2024", //
           PRINT_VENUES);
 
       assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFH).");
@@ -135,7 +141,7 @@ public class MainTest {
 
     @Test
     public void T1_xx_nine_venues_saved() throws Exception {
-      runCommands(unpack(CREATE_NINE_VENUES, PRINT_VENUES));
+      runCommands(unpack(CREATE_NINE_VENUES, SET_DATE, "26/02/2024", PRINT_VENUES));
 
       assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFH).");
       assertContains("Successfully created venue 'Comfy Corner Events Centre' (CCEC).");
@@ -164,7 +170,7 @@ public class MainTest {
 
     @Test
     public void T1_07_ten_venues_saved() throws Exception {
-      runCommands(unpack(CREATE_TEN_VENUES, PRINT_VENUES));
+      runCommands(unpack(CREATE_TEN_VENUES, SET_DATE, "26/02/2024", PRINT_VENUES));
 
       assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFH).");
       assertContains("Successfully created venue 'Comfy Corner Events Centre' (CCEC).");
@@ -206,6 +212,8 @@ public class MainTest {
           "FFH",
           "80",
           "150", //
+          SET_DATE, 
+          "26/02/2024", //
           PRINT_VENUES);
 
       assertContains("Venue not created: code 'FFH' is already used for 'Frugal Fiesta Hall'.");
@@ -228,6 +236,8 @@ public class MainTest {
           "FFH",
           "150",
           "2500", //
+          SET_DATE, 
+          "26/02/2024", //
           PRINT_VENUES);
 
       assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFH).");
@@ -261,6 +271,8 @@ public class MainTest {
           "CCEC",
           "120",
           "250", //
+          SET_DATE, 
+          "26/02/2024", //
           PRINT_VENUES);
 
       assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFH).");
@@ -882,7 +894,7 @@ public class MainTest {
 
     @Test
     public void T4_04_nine_venues_saved() throws Exception {
-      runCommands(unpack(CREATE_NINE_VENUES, PRINT_VENUES));
+      runCommands(unpack(CREATE_NINE_VENUES, SET_DATE, "26/02/2024", PRINT_VENUES));
 
       assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFH).");
       assertContains("Successfully created venue 'Comfy Corner Events Centre' (CCEC).");
@@ -938,6 +950,8 @@ public class MainTest {
           "CCEC",
           "120",
           "500", //
+          SET_DATE, 
+          "26/02/2024", //
           PRINT_VENUES);
 
       assertContains("There are two venues in the system:");
@@ -1006,6 +1020,8 @@ public class MainTest {
           "RVV",
           "999",
           "1000", //
+          SET_DATE, 
+          "26/02/2024", //
           PRINT_VENUES);
     
       assertContains("There are 11 venues in the system:");
@@ -1082,6 +1098,8 @@ public class MainTest {
           "RRV",
           "999",
           "1000", //
+          SET_DATE, 
+          "26/02/2024", //
           PRINT_VENUES);
       
       assertContains("Venue not created: code 'RRV' is already used for 'Refined Radiance Venue'.");

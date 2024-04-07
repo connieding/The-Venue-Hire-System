@@ -40,7 +40,7 @@ public class VenueHireSystem {
           listOfVenues.get(0).getVenueCode(), 
           Integer.toString(listOfVenues.get(0).getCapacity()), 
           Integer.toString(listOfVenues.get(0).getHireFee()), 
-          "TODO");
+          tempDate);
       
       } else if (listOfVenues.size() > 1 && listOfVenues.size() < 10) { // 2-9 bookings
 
@@ -59,7 +59,7 @@ public class VenueHireSystem {
             listOfVenues.get(i).getVenueCode(), 
             Integer.toString(listOfVenues.get(i).getCapacity()), 
             Integer.toString(listOfVenues.get(i).getHireFee()), 
-            "TODO");
+            tempDate);
         }
 
       } else if (listOfVenues.size() == 10){ // 10 bookings
