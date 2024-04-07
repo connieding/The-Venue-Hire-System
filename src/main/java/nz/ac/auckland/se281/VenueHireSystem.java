@@ -237,19 +237,23 @@ public class VenueHireSystem {
   }
 
   public void printBookings(String venueCode) {
-
+    Integer count = 0;
     for (Venue venue : listOfVenues) {
       if (venue.getVenueCode().equals(venueCode)) {
         MessageCli.PRINT_BOOKINGS_HEADER.printMessage(venue.getVenueName());
+        
         for (Booking booking : listOfBookings) {
           if (booking.getVenueCode().equals(venueCode)) {
             MessageCli.PRINT_BOOKINGS_ENTRY.printMessage(booking.getBookingReference(), booking.getBookingDate());
+            count++;
           }
+        }
+        if (count == 0) {
+          MessageCli.PRINT_BOOKINGS_NONE.printMessage(venue.getVenueName());
         }
         return;
       }
     }
-
     MessageCli.PRINT_BOOKINGS_VENUE_NOT_FOUND.printMessage(venueCode);
 
   }
