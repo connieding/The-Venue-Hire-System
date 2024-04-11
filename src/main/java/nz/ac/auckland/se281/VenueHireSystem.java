@@ -294,9 +294,29 @@ public class VenueHireSystem {
     }
   }
 
-  public void addServiceMusic(String bookingReference) {}
+  public void addServiceMusic(String bookingReference) {
+    for (Booking booking : listOfBookings) {
+      if (booking.getBookingReference().equals(bookingReference)) {
+        bookingReferenceExists = true;
+      }
+    }
+    if (!bookingReferenceExists) {
+      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
+      return;
+    }
+  }
 
-  public void addServiceFloral(String bookingReference, FloralType floralType) {}
+  public void addServiceFloral(String bookingReference, FloralType floralType) {
+    for (Booking booking : listOfBookings) {
+      if (booking.getBookingReference().equals(bookingReference)) {
+        bookingReferenceExists = true;
+      }
+    }
+    if (!bookingReferenceExists) {
+      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
+      return;
+    }
+  }
 
   public void viewInvoice(String bookingReference) {
     // TODO implement this method

@@ -1270,6 +1270,44 @@ public class MainTest {
       assertDoesNotContain(
           "Booking not made: venue 'Grand Gala Gardens' is already booked on 03/02/2024.");
     }
+
+    @Test
+    public void T5_08_add_music_service_booking_does_not_exist() throws Exception {
+      runCommands(
+          unpack(
+              CREATE_TEN_VENUES,
+              SET_DATE,
+              "26/02/2024", //
+              MAKE_BOOKING,
+              options("GGG", "27/03/2024", "client001@email.com", "230"), //
+              ADD_MUSIC,
+              "ZP4HRCZ4",
+              options("B")));
+
+      assertContains(
+          "Music service not added: there is no booking with reference 'ZP4HRCZ4' in the"
+              + " system.");
+      assertDoesNotContain("Successfully added", true);
+    }
+
+    @Test
+    public void T5_09_add_floral_service_booking_does_not_exist() throws Exception {
+      runCommands(
+          unpack(
+              CREATE_TEN_VENUES,
+              SET_DATE,
+              "26/02/2024", //
+              MAKE_BOOKING,
+              options("GGG", "27/03/2024", "client001@email.com", "230"), //
+              ADD_FLORAL,
+              "ZP4HRCZ4",
+              options("B")));
+
+      assertContains(
+          "Floral service not added: there is no booking with reference 'ZP4HRCZ4' in the"
+              + " system.");
+      assertDoesNotContain("Successfully added", true);
+    }
   }
 
   private static final Object[] CREATE_NINE_VENUES =
