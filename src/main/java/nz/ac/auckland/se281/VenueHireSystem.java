@@ -299,8 +299,8 @@ public class VenueHireSystem {
     // Successfully add catering service to booking
     MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
         "Catering (" + cateringType.getName() + ")", bookingReference);
-
-    System.out.println("* Catering (" + cateringType.getName() + ") - $" + cateringCost);
+    MessageCli.INVOICE_CONTENT_CATERING_ENTRY.printMessage(
+        cateringType.getName(), Integer.toString(cateringCost));
   }
 
   public void addServiceMusic(String bookingReference) {
