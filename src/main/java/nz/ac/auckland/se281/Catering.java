@@ -17,7 +17,7 @@ public class Catering extends Services {
       String serviceName,
       int costPerPerson,
       String numberOfAttendees) {
-    super(listOfBookings, bookingReference, serviceType);
+    super(listOfBookings, bookingReference, serviceType, serviceName);
 
     this.bookingReference = bookingReference;
     this.serviceType = serviceType;

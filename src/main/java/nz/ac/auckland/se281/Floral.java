@@ -14,7 +14,7 @@ public class Floral extends Services {
       String serviceType,
       String serviceName,
       int serviceCost) {
-    super(listOfBookings, bookingReference, serviceType);
+    super(listOfBookings, bookingReference, serviceType, serviceName);
     this.bookingReference = bookingReference;
     this.serviceType = serviceType;
     this.serviceName = serviceName;
