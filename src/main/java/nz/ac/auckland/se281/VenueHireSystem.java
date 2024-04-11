@@ -293,14 +293,9 @@ public class VenueHireSystem {
       return;
     }
 
-    // catering service total cost
-    int cateringCost = cateringType.getCostPerPerson() * Integer.parseInt(numberOfAttendees);
-
     // Successfully add catering service to booking
     MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
         "Catering (" + cateringType.getName() + ")", bookingReference);
-    MessageCli.INVOICE_CONTENT_CATERING_ENTRY.printMessage(
-        cateringType.getName(), Integer.toString(cateringCost));
   }
 
   public void addServiceMusic(String bookingReference) {
@@ -313,6 +308,9 @@ public class VenueHireSystem {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
       return;
     }
+
+    // Successfully add music service to booking
+    MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
   }
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
@@ -327,7 +325,5 @@ public class VenueHireSystem {
     }
   }
 
-  public void viewInvoice(String bookingReference) {
-    // TODO implement this method
-  }
+  public void viewInvoice(String bookingReference) {}
 }
