@@ -12,7 +12,7 @@ public class VenueHireSystem {
   private String[] numbers = {"two", "three", "four", "five", "six", "seven", "eight", "nine"};
   private String systemDate;
   private boolean codeExists = false;
-  private boolean bookingReferenceExists = false;
+  // private boolean bookingReferenceExists = false;
   private String nameOfVenue;
   private String bookingReference;
   private String numberOfAttendees;
@@ -283,57 +283,79 @@ public class VenueHireSystem {
   }
 
   public void addCateringService(String bookingReference, CateringType cateringType) {
-    for (Booking booking : listOfBookings) {
-      if (booking.getBookingReference().equals(bookingReference)) {
-        bookingReferenceExists = true;
-      }
-    }
-    if (!bookingReferenceExists) {
-      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
-      return;
-    }
+    Catering catering =
+        new Catering(
+            listOfBookings,
+            bookingReference,
+            "Catering",
+            cateringType.getName(),
+            cateringType.getCostPerPerson(),
+            numberOfAttendees);
+    catering.addService();
+
+    // for (Booking booking : listOfBookings) {
+    //   if (booking.getBookingReference().equals(bookingReference)) {
+    //     bookingReferenceExists = true;
+    //   }
+    // }
+    // if (!bookingReferenceExists) {
+    //   MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
+    //   return;
+    // }
 
     // Successfully add catering service to booking
-    MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
-        "Catering (" + cateringType.getName() + ")", bookingReference);
+    // MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
+    //     "Catering (" + cateringType.getName() + ")", bookingReference);
   }
 
   public void addServiceMusic(String bookingReference) {
-    for (Booking booking : listOfBookings) {
-      if (booking.getBookingReference().equals(bookingReference)) {
-        bookingReferenceExists = true;
-      }
-    }
-    if (!bookingReferenceExists) {
-      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
-      return;
-    }
 
-    // Successfully add music service to booking
-    MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
+    Music music = new Music(listOfBookings, bookingReference, "Music");
+    music.addService();
+
+    // Services music = new Services(listOfBookings, bookingReference, "Music");
+    // music.addService();
+
+    // for (Booking booking : listOfBookings) {
+    //   if (booking.getBookingReference().equals(bookingReference)) {
+    //     bookingReferenceExists = true;
+    //   }
+    // }
+    // if (!bookingReferenceExists) {
+    //   MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
+    //   return;
+    // }
+
+    // // Successfully add music service to booking
+    // MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
   }
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
-    for (Booking booking : listOfBookings) {
-      if (booking.getBookingReference().equals(bookingReference)) {
-        bookingReferenceExists = true;
-      }
-    }
-    if (!bookingReferenceExists) {
-      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
-      return;
-    }
+    Floral floral =
+        new Floral(
+            listOfBookings, bookingReference, "Floral", floralType.getName(), floralType.getCost());
+    floral.addService();
 
-    if (floralType == FloralType.STANDARD) {
-      // Successfully add floral service to booking
-      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
-          "Floral (" + floralType.getName() + ")", bookingReference);
-      return;
-    } else {
-      // Successfully add floral service to booking
-      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
-          "Floral (" + FloralType.DELUXE + ")", bookingReference);
-    }
+    // for (Booking booking : listOfBookings) {
+    //   if (booking.getBookingReference().equals(bookingReference)) {
+    //     bookingReferenceExists = true;
+    //   }
+    // }
+    // if (!bookingReferenceExists) {
+    //   MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
+    //   return;
+    // }
+
+    // if (floralType == FloralType.STANDARD) {
+    //   // Successfully add floral service to booking
+    //   MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
+    //       "Floral (" + floralType.getName() + ")", bookingReference);
+    //   return;
+    // } else {
+    //   // Successfully add floral service to booking
+    //   MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
+    //       "Floral (" + FloralType.DELUXE + ")", bookingReference);
+    // }
   }
 
   public void viewInvoice(String bookingReference) {}
