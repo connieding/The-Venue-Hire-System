@@ -323,6 +323,17 @@ public class VenueHireSystem {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
       return;
     }
+
+    if (floralType == FloralType.STANDARD) {
+      // Successfully add floral service to booking
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
+          "Floral (" + floralType.getName() + ")", bookingReference);
+      return;
+    } else {
+      // Successfully add floral service to booking
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
+          "Floral (" + FloralType.DELUXE + ")", bookingReference);
+    }
   }
 
   public void viewInvoice(String bookingReference) {}
