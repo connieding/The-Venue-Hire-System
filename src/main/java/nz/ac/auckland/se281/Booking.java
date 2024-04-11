@@ -13,8 +13,13 @@ public class Booking {
   private String customerEmail;
   private String numberOfAttendees;
 
-
-  public Booking(String venueCode, String bookingReference, String venueName, String venueDate, String clientEmail, String venueAttendees) {
+  public Booking(
+      String venueCode,
+      String bookingReference,
+      String venueName,
+      String venueDate,
+      String clientEmail,
+      String venueAttendees) {
     this.venueCode = venueCode;
     this.bookingReference = bookingReference;
     this.venueName = venueName;
@@ -24,7 +29,7 @@ public class Booking {
     this.numberOfAttendees = venueAttendees;
 
     String[] dateParts = venueDate.split("/");
-    this.nextDay = Integer.parseInt(dateParts[0]);  
+    this.nextDay = Integer.parseInt(dateParts[0]);
     this.nextMonth = Integer.parseInt(dateParts[1]);
     this.nextYear = Integer.parseInt(dateParts[2]);
   }
@@ -61,10 +66,10 @@ public class Booking {
 
     if (nextDay < 10) {
       avaliableDay = "0" + nextDay;
-    } 
+    }
     if (nextMonth < 10) {
       avaliableMonth = "0" + nextMonth;
-    } 
+    }
     if (nextDay >= 10 && nextMonth >= 10) {
       avaliableDay = Integer.toString(nextDay);
       avaliableMonth = Integer.toString(nextMonth);
