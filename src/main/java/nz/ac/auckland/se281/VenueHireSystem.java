@@ -12,6 +12,7 @@ public class VenueHireSystem {
   private String[] numbers = {"two", "three", "four", "five", "six", "seven", "eight", "nine"};
   private String systemDate;
   private boolean codeExists = false;
+  private boolean bookingReferenceExists = false;
   private String nameOfVenue;
   private String bookingReference;
   private String numberOfAttendees;
@@ -282,16 +283,20 @@ public class VenueHireSystem {
   }
 
   public void addCateringService(String bookingReference, CateringType cateringType) {
-    // TODO implement this method
+    for (Booking booking : listOfBookings) {
+      if (booking.getBookingReference().equals(bookingReference)) {
+        bookingReferenceExists = true;
+      }
+    }
+    if (!bookingReferenceExists) {
+      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
+      return;
+    }
   }
 
-  public void addServiceMusic(String bookingReference) {
-    // TODO implement this method
-  }
+  public void addServiceMusic(String bookingReference) {}
 
-  public void addServiceFloral(String bookingReference, FloralType floralType) {
-    // TODO implement this method
-  }
+  public void addServiceFloral(String bookingReference, FloralType floralType) {}
 
   public void viewInvoice(String bookingReference) {
     // TODO implement this method

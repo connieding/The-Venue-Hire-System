@@ -15,7 +15,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
   MainTest.Task1.class,
   MainTest.Task2.class,
-  // MainTest.Task3.class,
+  MainTest.Task3.class,
   // MainTest.YourTests.class, // Uncomment this line to run your own tests
 })
 public class MainTest {
@@ -79,7 +79,7 @@ public class MainTest {
 
       assertContains("Venue not created: hire fee must be a positive number.");
       assertDoesNotContain("Successfully created venue", true);
-    }   
+    }
 
     @Test
     public void T1_06_one_venue_saved() throws Exception {
@@ -89,7 +89,7 @@ public class MainTest {
           "FFH",
           "80",
           "150", //
-          SET_DATE, 
+          SET_DATE,
           "26/02/2024", //
           PRINT_VENUES);
 
@@ -106,7 +106,7 @@ public class MainTest {
           "FFH",
           "80",
           "150", //
-          SET_DATE, 
+          SET_DATE,
           "26/02/2024", //
           PRINT_VENUES);
 
@@ -128,7 +128,7 @@ public class MainTest {
           "CCEC",
           "120",
           "250", //
-          SET_DATE, 
+          SET_DATE,
           "26/02/2024", //
           PRINT_VENUES);
 
@@ -166,7 +166,7 @@ public class MainTest {
 
       assertDoesNotContain("There is", true);
       assertDoesNotContain("9 venues", true);
-    }    
+    }
 
     @Test
     public void T1_07_ten_venues_saved() throws Exception {
@@ -212,7 +212,7 @@ public class MainTest {
           "FFH",
           "80",
           "150", //
-          SET_DATE, 
+          SET_DATE,
           "26/02/2024", //
           PRINT_VENUES);
 
@@ -236,7 +236,7 @@ public class MainTest {
           "FFH",
           "150",
           "2500", //
-          SET_DATE, 
+          SET_DATE,
           "26/02/2024", //
           PRINT_VENUES);
 
@@ -271,7 +271,7 @@ public class MainTest {
           "CCEC",
           "120",
           "250", //
-          SET_DATE, 
+          SET_DATE,
           "26/02/2024", //
           PRINT_VENUES);
 
@@ -289,7 +289,7 @@ public class MainTest {
       assertDoesNotContain("1 venue", true);
       assertDoesNotContain("three venue", true);
       assertDoesNotContain("3 venue", true);
-    }    
+    }
 
     public static class YourTests extends CliTest {
       public YourTests() {
@@ -872,7 +872,6 @@ public class MainTest {
 
       assertContains("Venue not created: capacity must be a number.");
       assertDoesNotContain("Successfully created venue", true);
-
     }
 
     @Test
@@ -881,7 +880,6 @@ public class MainTest {
 
       assertContains("Venue not created: hire fee must be a positive number.");
       assertDoesNotContain("Successfully created venue", true);
-
     }
 
     @Test
@@ -950,7 +948,7 @@ public class MainTest {
           "CCEC",
           "120",
           "500", //
-          SET_DATE, 
+          SET_DATE,
           "26/02/2024", //
           PRINT_VENUES);
 
@@ -1020,10 +1018,10 @@ public class MainTest {
           "RVV",
           "999",
           "1000", //
-          SET_DATE, 
+          SET_DATE,
           "26/02/2024", //
           PRINT_VENUES);
-    
+
       assertContains("There are 11 venues in the system:");
       assertContains("Frugal Fiesta Hall (FFH) - 80 people - $150 base hire fee");
       assertContains("Comfy Corner Events Centre (CCEC) - 120 people - $500 base hire fee");
@@ -1098,12 +1096,12 @@ public class MainTest {
           "RRV",
           "999",
           "1000", //
-          SET_DATE, 
+          SET_DATE,
           "26/02/2024", //
           PRINT_VENUES);
-      
+
       assertContains("Venue not created: code 'RRV' is already used for 'Refined Radiance Venue'.");
-    
+
       assertContains("There are 10 venues in the system:");
       assertContains("Frugal Fiesta Hall (FFH) - 80 people - $150 base hire fee");
       assertContains("Comfy Corner Events Centre (CCEC) - 120 people - $500 base hire fee");
@@ -1138,67 +1136,73 @@ public class MainTest {
     @Test
     public void T5_01_venuecode_exists() throws Exception {
       runCommands(
-        CREATE_VENUE,
-        "'Frugal Fiesta Hall'",
-        "FFC",
-        "120",
-        "500", //
-        SET_DATE,
-        "26/02/2024", //
-        MAKE_BOOKING,
-        options("FFH", "27/02/2024", "client001@email.com", "70"));
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFC",
+          "120",
+          "500", //
+          SET_DATE,
+          "26/02/2024", //
+          MAKE_BOOKING,
+          options("FFH", "27/02/2024", "client001@email.com", "70"));
 
-    assertContains("Booking not made: there is no venue with code 'FFH'.");
+      assertContains("Booking not made: there is no venue with code 'FFH'.");
     }
 
     @Test
     public void T5_02_venueDate_past() throws Exception {
       runCommands(
-        CREATE_VENUE,
-        "'Frugal Fiesta Hall'",
-        "FFH",
-        "120",
-        "500", //
-        SET_DATE,
-        "26/02/2024", //
-        MAKE_BOOKING,
-        options("FFH", "25/02/2024", "client001@email.com", "70"));
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFH",
+          "120",
+          "500", //
+          SET_DATE,
+          "26/02/2024", //
+          MAKE_BOOKING,
+          options("FFH", "25/02/2024", "client001@email.com", "70"));
 
-    assertContains("Booking not made: '25/02/2024' is in the past (system date is 26/02/2024).");
+      assertContains("Booking not made: '25/02/2024' is in the past (system date is 26/02/2024).");
     }
 
     @Test
     public void T5_03_venueDate_sameDay() throws Exception {
       runCommands(
-        CREATE_VENUE,
-        "'Frugal Fiesta Hall'",
-        "FFH",
-        "120",
-        "500", //
-        SET_DATE,
-        "26/02/2024", //
-        MAKE_BOOKING,
-        options("FFH", "26/02/2024", "client001@email.com", "70"));
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFH",
+          "120",
+          "500", //
+          SET_DATE,
+          "26/02/2024", //
+          MAKE_BOOKING,
+          options("FFH", "26/02/2024", "client001@email.com", "70"));
 
-    assertContains("Successfully created booking 'HUD14D8O' for 'Frugal Fiesta Hall' on 26/02/2024 for 70 people.");
-    assertDoesNotContain("Booking not made: '26/02/2024' is in the past (system date is 26/02/2024).");
+      assertContains(
+          "Successfully created booking 'HUD14D8O' for 'Frugal Fiesta Hall' on 26/02/2024 for 70"
+              + " people.");
+      assertDoesNotContain(
+          "Booking not made: '26/02/2024' is in the past (system date is 26/02/2024).");
     }
 
     @Test
     public void T5_04_venueDate_laterDay() throws Exception {
       runCommands(
-        CREATE_VENUE,
-        "'Frugal Fiesta Hall'",
-        "FFH",
-        "120",
-        "500", //
-        SET_DATE,
-        "26/02/2024", //
-        MAKE_BOOKING,
-        options("FFH", "26/03/2024", "client001@email.com", "70"));
-        
-    assertContains("Successfully created booking 'HUD14D8O' for 'Frugal Fiesta Hall' on 26/03/2024 for 70 people.");
-    assertDoesNotContain("Booking not made: '26/03/2024' is in the past (system date is 26/02/2024).");
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFH",
+          "120",
+          "500", //
+          SET_DATE,
+          "26/02/2024", //
+          MAKE_BOOKING,
+          options("FFH", "26/03/2024", "client001@email.com", "70"));
+
+      assertContains(
+          "Successfully created booking 'HUD14D8O' for 'Frugal Fiesta Hall' on 26/03/2024 for 70"
+              + " people.");
+      assertDoesNotContain(
+          "Booking not made: '26/03/2024' is in the past (system date is 26/02/2024).");
     }
 
     @Test
@@ -1213,9 +1217,13 @@ public class MainTest {
               MAKE_BOOKING,
               options("FFH", "04/02/2024", "client002@email.com", "250")));
 
-      assertContains("Successfully created booking 'HUD14D8O' for 'Grand Gala Gardens' on 03/02/2024 for 230 people.");
+      assertContains(
+          "Successfully created booking 'HUD14D8O' for 'Grand Gala Gardens' on 03/02/2024 for 230"
+              + " people.");
       assertContains("Number of attendees adjusted from 250 to 80, as the venue capacity is 80.");
-      assertContains("Successfully created booking 'ZP4HRCZ4' for 'Frugal Fiesta Hall' on 04/02/2024 for 80 people.");
+      assertContains(
+          "Successfully created booking 'ZP4HRCZ4' for 'Frugal Fiesta Hall' on 04/02/2024 for 80"
+              + " people.");
       assertDoesNotContain("Booking not made", true);
     }
 
@@ -1231,9 +1239,14 @@ public class MainTest {
               MAKE_BOOKING,
               options("GGG", "03/02/2024", "client002@email.com", "250")));
 
-      assertContains("Successfully created booking 'HUD14D8O' for 'Grand Gala Gardens' on 03/02/2024 for 230 people.");
-      assertDoesNotContain("Successfully created booking 'ZP4HRCZ4' for 'Grand Gala Gardens' on 03/02/2024 for 250 people.");
-      assertContains("Booking not made: venue 'Grand Gala Gardens' is already booked on 03/02/2024.");
+      assertContains(
+          "Successfully created booking 'HUD14D8O' for 'Grand Gala Gardens' on 03/02/2024 for 230"
+              + " people.");
+      assertDoesNotContain(
+          "Successfully created booking 'ZP4HRCZ4' for 'Grand Gala Gardens' on 03/02/2024 for 250"
+              + " people.");
+      assertContains(
+          "Booking not made: venue 'Grand Gala Gardens' is already booked on 03/02/2024.");
     }
 
     @Test
@@ -1248,11 +1261,15 @@ public class MainTest {
               MAKE_BOOKING,
               options("FFH", "03/02/2024", "client002@email.com", "80")));
 
-      assertContains("Successfully created booking 'HUD14D8O' for 'Grand Gala Gardens' on 03/02/2024 for 230 people.");
-      assertContains("Successfully created booking 'ZP4HRCZ4' for 'Frugal Fiesta Hall' on 03/02/2024 for 80 people.");
-      assertDoesNotContain("Booking not made: venue 'Grand Gala Gardens' is already booked on 03/02/2024.");
+      assertContains(
+          "Successfully created booking 'HUD14D8O' for 'Grand Gala Gardens' on 03/02/2024 for 230"
+              + " people.");
+      assertContains(
+          "Successfully created booking 'ZP4HRCZ4' for 'Frugal Fiesta Hall' on 03/02/2024 for 80"
+              + " people.");
+      assertDoesNotContain(
+          "Booking not made: venue 'Grand Gala Gardens' is already booked on 03/02/2024.");
     }
-
   }
 
   private static final Object[] CREATE_NINE_VENUES =
