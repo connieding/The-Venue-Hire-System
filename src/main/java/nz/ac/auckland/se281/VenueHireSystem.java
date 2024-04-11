@@ -293,8 +293,14 @@ public class VenueHireSystem {
       return;
     }
 
+    // catering service total cost
+    int cateringCost = cateringType.getCostPerPerson() * Integer.parseInt(numberOfAttendees);
+
+    // Successfully add catering service to booking
     MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
         "Catering (" + cateringType.getName() + ")", bookingReference);
+
+    System.out.println("* Catering (" + cateringType.getName() + ") - $" + cateringCost);
   }
 
   public void addServiceMusic(String bookingReference) {
