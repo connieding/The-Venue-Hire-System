@@ -292,6 +292,9 @@ public class VenueHireSystem {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
       return;
     }
+
+    MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
+        "Catering (" + cateringType.getName() + ")", bookingReference);
   }
 
   public void addServiceMusic(String bookingReference) {
