@@ -303,6 +303,8 @@ public class VenueHireSystem {
 
     Music music = new Music(listOfBookings, bookingReference, "Music");
     music.addService();
+
+    listOfMusic.add(music);
   }
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
@@ -319,6 +321,12 @@ public class VenueHireSystem {
         MessageCli.INVOICE_CONTENT_CATERING_ENTRY.printMessage(
             listOfCatering.get(i).getCateringName(),
             Integer.toString(listOfCatering.get(i).cateringCost()));
+      }
+    }
+
+    for (int i = 0; i < listOfMusic.size(); i++) {
+      if (listOfMusic.get(i).getBookingReference().equals(bookingReference)) {
+        MessageCli.INVOICE_CONTENT_MUSIC_ENTRY.printMessage("500");
       }
     }
   }
