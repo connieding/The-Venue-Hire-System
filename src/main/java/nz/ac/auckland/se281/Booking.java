@@ -81,4 +81,16 @@ public class Booking {
     avaliableDate = avaliableDay + "/" + avaliableMonth + "/" + nextYear;
     return avaliableDate;
   }
+
+  public String getClientEmail() {
+    return this.customerEmail;
+  }
+
+  public String getDateBooked() {
+    return this.dateBooked;
+  }
+
+  public String getNumberOfAttendees() {
+    return this.numberOfAttendees;
+  }
 }

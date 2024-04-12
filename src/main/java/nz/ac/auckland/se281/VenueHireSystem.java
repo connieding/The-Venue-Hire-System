@@ -324,6 +324,23 @@ public class VenueHireSystem {
 
   public void viewInvoice(String bookingReference) {
 
+    boolean bookingReferenceExists = false;
+    for (Booking booking : listOfBookings) {
+      if (booking.getBookingReference().equals(bookingReference)) {
+        bookingReferenceExists = true;
+      }
+    }
+    if (!bookingReferenceExists) {
+      MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);
+      return;
+    }
+
+    for (Booking booking : listOfBookings) {
+      if (booking.getBookingReference().equals(bookingReference)) {
+        MessageCli.INVOICE_CONTENT_TOP_HALF.printMessage("");
+      }
+    }
+
     int bookingCateringCost = 0;
     for (int i = 0; i < listOfCatering.size(); i++) {
       if (listOfCatering.get(i).getBookingReference().equals(bookingReference)) {
