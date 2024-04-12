@@ -260,7 +260,13 @@ public class VenueHireSystem {
         bookingReference, nameOfVenue, options[1], numberOfAttendees);
     listOfBookings.add(
         new Booking(
-            options[0], bookingReference, nameOfVenue, options[1], options[2], numberOfAttendees));
+            options[0],
+            bookingReference,
+            nameOfVenue,
+            options[1],
+            options[2],
+            numberOfAttendees,
+            systemDate));
   }
 
   public void printBookings(String venueCode) {
@@ -312,6 +318,8 @@ public class VenueHireSystem {
         new Floral(
             listOfBookings, bookingReference, "Floral", floralType.getName(), floralType.getCost());
     floral.addService();
+
+    listOfFloral.add(floral);
   }
 
   public void viewInvoice(String bookingReference) {
@@ -329,6 +337,15 @@ public class VenueHireSystem {
       if (listOfMusic.get(i).getBookingReference().equals(bookingReference)) {
         bookingMusicCost += 500;
         MessageCli.INVOICE_CONTENT_MUSIC_ENTRY.printMessage(Integer.toString(bookingMusicCost));
+      }
+    }
+
+    int bookingFloralCost = 0;
+    for (int i = 0; i < listOfFloral.size(); i++) {
+      if (listOfFloral.get(i).getBookingReference().equals(bookingReference)) {
+        bookingFloralCost += listOfFloral.get(i).getFloralCost();
+        MessageCli.INVOICE_CONTENT_FLORAL_ENTRY.printMessage(
+            listOfFloral.get(i).getFloralName(), Integer.toString(bookingFloralCost));
       }
     }
 
@@ -350,6 +367,7 @@ public class VenueHireSystem {
     }
 
     MessageCli.INVOICE_CONTENT_BOTTOM_HALF.printMessage(
-        Integer.toString(bookingHireFee + bookingCateringCost));
+        Integer.toString(
+            bookingHireFee + bookingCateringCost + bookingMusicCost + bookingFloralCost));
   }
 }

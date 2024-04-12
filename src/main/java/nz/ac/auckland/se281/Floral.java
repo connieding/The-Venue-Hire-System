@@ -20,4 +20,16 @@ public class Floral extends Services {
     this.serviceName = serviceName;
     this.serviceCost = serviceCost;
   }
+
+  public Object getBookingReference() {
+    return this.bookingReference;
+  }
+
+  public int getFloralCost() {
+    return this.serviceCost;
+  }
+
+  public String getFloralName() {
+    return this.serviceName;
+  }
 }

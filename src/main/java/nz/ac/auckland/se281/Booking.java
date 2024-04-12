@@ -7,6 +7,7 @@ public class Booking {
   private String venueName;
   private String dateOfBooking;
   private String avaliableDate;
+  private String dateBooked;
   private int nextDay;
   private int nextMonth;
   private int nextYear;
@@ -19,7 +20,8 @@ public class Booking {
       String venueName,
       String venueDate,
       String clientEmail,
-      String venueAttendees) {
+      String venueAttendees,
+      String dateBooked) {
     this.venueCode = venueCode;
     this.bookingReference = bookingReference;
     this.venueName = venueName;
@@ -27,6 +29,7 @@ public class Booking {
     this.avaliableDate = venueDate;
     this.customerEmail = clientEmail;
     this.numberOfAttendees = venueAttendees;
+    this.dateBooked = dateBooked;
 
     String[] dateParts = venueDate.split("/");
     this.nextDay = Integer.parseInt(dateParts[0]);
