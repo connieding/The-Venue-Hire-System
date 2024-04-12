@@ -348,5 +348,8 @@ public class VenueHireSystem {
         MessageCli.INVOICE_CONTENT_VENUE_FEE.printMessage(Integer.toString(bookingHireFee));
       }
     }
+
+    MessageCli.INVOICE_CONTENT_BOTTOM_HALF.printMessage(
+        Integer.toString(bookingHireFee + bookingCateringCost));
   }
 }
