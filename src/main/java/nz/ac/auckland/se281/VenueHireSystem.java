@@ -7,10 +7,10 @@ import nz.ac.auckland.se281.Types.FloralType;
 
 public class VenueHireSystem {
 
-  private List<Venue> listOfVenues = new ArrayList<Venue>();
-  private List<Booking> listOfBookings = new ArrayList<Booking>();
-  private List<Catering> listOfCatering = new ArrayList<Catering>();
-  private List<Music> listOfMusic = new ArrayList<Music>();
+  protected List<Venue> listOfVenues = new ArrayList<Venue>();
+  protected List<Booking> listOfBookings = new ArrayList<Booking>();
+  protected List<Catering> listOfCatering = new ArrayList<Catering>();
+  protected List<Music> listOfMusic = new ArrayList<Music>();
   private List<Floral> listOfFloral = new ArrayList<Floral>();
   private String[] numbers = {"two", "three", "four", "five", "six", "seven", "eight", "nine"};
   private String systemDate;
@@ -316,17 +316,36 @@ public class VenueHireSystem {
 
   public void viewInvoice(String bookingReference) {
 
+    int bookingCateringCost = 0;
     for (int i = 0; i < listOfCatering.size(); i++) {
       if (listOfCatering.get(i).getBookingReference().equals(bookingReference)) {
+        bookingCateringCost += listOfCatering.get(i).cateringCost();
         MessageCli.INVOICE_CONTENT_CATERING_ENTRY.printMessage(
-            listOfCatering.get(i).getCateringName(),
-            Integer.toString(listOfCatering.get(i).cateringCost()));
+            listOfCatering.get(i).getCateringName(), Integer.toString(bookingCateringCost));
+      }
+    }
+    int bookingMusicCost = 0;
+    for (int i = 0; i < listOfMusic.size(); i++) {
+      if (listOfMusic.get(i).getBookingReference().equals(bookingReference)) {
+        bookingMusicCost += 500;
+        MessageCli.INVOICE_CONTENT_MUSIC_ENTRY.printMessage(Integer.toString(bookingMusicCost));
       }
     }
 
-    for (int i = 0; i < listOfMusic.size(); i++) {
-      if (listOfMusic.get(i).getBookingReference().equals(bookingReference)) {
-        MessageCli.INVOICE_CONTENT_MUSIC_ENTRY.printMessage("500");
+    // Find the venue code related to the booking reference
+    String bookingVenueCode = "";
+    for (int i = 0; i < listOfBookings.size(); i++) {
+      if (listOfBookings.get(i).getBookingReference().equals(bookingReference)) {
+        bookingVenueCode = listOfBookings.get(i).getVenueCode();
+      }
+    }
+
+    // INVOICE_CONTENT_VENUE_FEE("  * Venue hire - $%s"),
+    int bookingHireFee = 0;
+    for (int i = 0; i < listOfVenues.size(); i++) {
+      if (listOfVenues.get(i).getVenueCode().equals(bookingVenueCode)) {
+        bookingHireFee = listOfVenues.get(i).getHireFee();
+        MessageCli.INVOICE_CONTENT_VENUE_FEE.printMessage(Integer.toString(bookingHireFee));
       }
     }
   }
