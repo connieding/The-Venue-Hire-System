@@ -338,7 +338,12 @@ public class VenueHireSystem {
     for (Booking booking : listOfBookings) {
       if (booking.getBookingReference().equals(bookingReference)) {
         MessageCli.INVOICE_CONTENT_TOP_HALF.printMessage(
-            bookingReference, "", booking.getDateBooked(), booking.getBookingDate(), "", "");
+            bookingReference,
+            booking.getClientEmail(),
+            booking.getDateBooked(),
+            booking.getBookingDate(),
+            booking.getNumberOfAttendees(),
+            booking.getVenueName());
       }
     }
 
