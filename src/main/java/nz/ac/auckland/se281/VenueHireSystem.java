@@ -300,6 +300,7 @@ public class VenueHireSystem {
             cateringType.getName(),
             cateringType.getCostPerPerson(),
             numberOfAttendees);
+    catering.checkBookingExists();
     catering.addService();
 
     listOfCatering.add(catering);
@@ -308,6 +309,7 @@ public class VenueHireSystem {
   public void addServiceMusic(String bookingReference) {
 
     Music music = new Music(listOfBookings, bookingReference, "Music");
+    music.checkBookingExists();
     music.addService();
 
     listOfMusic.add(music);
@@ -317,6 +319,8 @@ public class VenueHireSystem {
     Floral floral =
         new Floral(
             listOfBookings, bookingReference, "Floral", floralType.getName(), floralType.getCost());
+
+    floral.checkBookingExists();
     floral.addService();
 
     listOfFloral.add(floral);

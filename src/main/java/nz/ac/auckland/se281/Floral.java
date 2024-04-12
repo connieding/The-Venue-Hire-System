@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Floral extends Services {
   private String bookingReference;
-  private String serviceType;
   private String serviceName;
   private int serviceCost;
 
@@ -14,9 +13,8 @@ public class Floral extends Services {
       String serviceType,
       String serviceName,
       int serviceCost) {
-    super(listOfBookings, bookingReference, serviceType, serviceName);
+    super(listOfBookings, bookingReference, serviceType);
     this.bookingReference = bookingReference;
-    this.serviceType = serviceType;
     this.serviceName = serviceName;
     this.serviceCost = serviceCost;
   }
@@ -31,5 +29,13 @@ public class Floral extends Services {
 
   public String getFloralName() {
     return this.serviceName;
+  }
+
+  @Override
+  public void addService() {
+    if (bookingReferenceExists) {
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
+          "Floral (" + this.serviceName + ")", this.bookingReference);
+    }
   }
 }

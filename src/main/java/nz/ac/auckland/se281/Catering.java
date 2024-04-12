@@ -5,7 +5,6 @@ import java.util.List;
 public class Catering extends Services {
 
   private String bookingReference;
-  private String serviceType;
   private String serviceName;
   private String numberOfAttendees;
   private int costPerPerson;
@@ -17,10 +16,9 @@ public class Catering extends Services {
       String serviceName,
       int costPerPerson,
       String numberOfAttendees) {
-    super(listOfBookings, bookingReference, serviceType, serviceName);
+    super(listOfBookings, bookingReference, serviceType);
 
     this.bookingReference = bookingReference;
-    this.serviceType = serviceType;
     this.serviceName = serviceName;
     this.costPerPerson = costPerPerson;
     this.numberOfAttendees = numberOfAttendees;
@@ -36,5 +34,13 @@ public class Catering extends Services {
 
   public int cateringCost() {
     return this.costPerPerson * Integer.parseInt(this.numberOfAttendees);
+  }
+
+  @Override
+  public void addService() {
+    if (bookingReferenceExists) {
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
+          "Catering (" + this.serviceName + ")", this.bookingReference);
+    }
   }
 }
