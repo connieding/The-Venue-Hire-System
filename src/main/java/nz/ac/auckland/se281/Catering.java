@@ -25,4 +25,16 @@ public class Catering extends Services {
     this.costPerPerson = costPerPerson;
     this.numberOfAttendees = numberOfAttendees;
   }
+
+  public Object getBookingReference() {
+    return this.bookingReference;
+  }
+
+  public String getCateringName() {
+    return this.serviceName;
+  }
+
+  public int cateringCost() {
+    return this.costPerPerson * Integer.parseInt(this.numberOfAttendees);
+  }
 }

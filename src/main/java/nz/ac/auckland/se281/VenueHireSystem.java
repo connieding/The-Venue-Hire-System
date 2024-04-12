@@ -9,6 +9,9 @@ public class VenueHireSystem {
 
   private List<Venue> listOfVenues = new ArrayList<Venue>();
   private List<Booking> listOfBookings = new ArrayList<Booking>();
+  private List<Catering> listOfCatering = new ArrayList<Catering>();
+  private List<Music> listOfMusic = new ArrayList<Music>();
+  private List<Floral> listOfFloral = new ArrayList<Floral>();
   private String[] numbers = {"two", "three", "four", "five", "six", "seven", "eight", "nine"};
   private String systemDate;
   private boolean codeExists = false;
@@ -292,6 +295,8 @@ public class VenueHireSystem {
             cateringType.getCostPerPerson(),
             numberOfAttendees);
     catering.addService();
+
+    listOfCatering.add(catering);
   }
 
   public void addServiceMusic(String bookingReference) {
@@ -307,5 +312,14 @@ public class VenueHireSystem {
     floral.addService();
   }
 
-  public void viewInvoice(String bookingReference) {}
+  public void viewInvoice(String bookingReference) {
+
+    for (int i = 0; i < listOfCatering.size(); i++) {
+      if (listOfCatering.get(i).getBookingReference().equals(bookingReference)) {
+        MessageCli.INVOICE_CONTENT_CATERING_ENTRY.printMessage(
+            listOfCatering.get(i).getCateringName(),
+            Integer.toString(listOfCatering.get(i).cateringCost()));
+      }
+    }
+  }
 }

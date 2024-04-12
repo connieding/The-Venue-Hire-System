@@ -2,7 +2,7 @@ package nz.ac.auckland.se281;
 
 import java.util.List;
 
-public class Services {
+public abstract class Services {
   private String bookingReference;
   private String serviceType;
   private String serviceName;
