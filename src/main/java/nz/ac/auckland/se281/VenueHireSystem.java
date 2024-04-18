@@ -24,6 +24,7 @@ public class VenueHireSystem {
 
   public void printVenues() {
 
+    // Check if there are venues in the system
     if (listOfVenues.size() > 0) {
       if (listOfVenues.size() == 1) { // one booking
 
@@ -107,6 +108,7 @@ public class VenueHireSystem {
               tempDate);
         }
       }
+      // No venues in the system
     } else {
       MessageCli.NO_VENUES.printMessage();
     }
@@ -172,6 +174,7 @@ public class VenueHireSystem {
 
   public void printSystemDate() {
 
+    // Check if system date has been set
     if (systemDate != null) {
       MessageCli.CURRENT_DATE.printMessage(systemDate);
     } else {
@@ -270,10 +273,14 @@ public class VenueHireSystem {
 
   public void printBookings(String venueCode) {
     Integer count = 0;
+
     for (Venue venue : listOfVenues) {
+      // Check if the venue code exists and print the header that includes venue name
       if (venue.getVenueCode().equals(venueCode)) {
         MessageCli.PRINT_BOOKINGS_HEADER.printMessage(venue.getVenueName());
 
+        // Prints all the bookings that match the venue code along with booking reference and event
+        // date
         for (Booking booking : listOfBookings) {
           if (booking.getVenueCode().equals(venueCode)) {
             MessageCli.PRINT_BOOKINGS_ENTRY.printMessage(
@@ -281,6 +288,7 @@ public class VenueHireSystem {
             count++;
           }
         }
+        // Check if there are no bookings for the venue
         if (count == 0) {
           MessageCli.PRINT_BOOKINGS_NONE.printMessage(venue.getVenueName());
         }
@@ -328,11 +336,13 @@ public class VenueHireSystem {
   public void viewInvoice(String bookingReference) {
 
     boolean bookingReferenceExists = false;
+    // Check if the booking reference exists
     for (Booking booking : listOfBookings) {
       if (booking.getBookingReference().equals(bookingReference)) {
         bookingReferenceExists = true;
       }
     }
+    // Print message for if booking reference does not exist
     if (!bookingReferenceExists) {
       MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);
       return;
@@ -350,6 +360,7 @@ public class VenueHireSystem {
       }
     }
 
+    // Calculates the total cost of catering for specific booking reference
     int bookingCateringCost = 0;
     for (int i = 0; i < listOfCatering.size(); i++) {
       if (listOfCatering.get(i).getBookingReference().equals(bookingReference)) {
@@ -358,6 +369,8 @@ public class VenueHireSystem {
             listOfCatering.get(i).getCateringName(), Integer.toString(bookingCateringCost));
       }
     }
+
+    // Calculates the total cost of music for specific booking reference
     int bookingMusicCost = 0;
     for (int i = 0; i < listOfMusic.size(); i++) {
       if (listOfMusic.get(i).getBookingReference().equals(bookingReference)) {
@@ -366,6 +379,7 @@ public class VenueHireSystem {
       }
     }
 
+    // Calculates the total cost of floral for specific booking reference
     int bookingFloralCost = 0;
     for (int i = 0; i < listOfFloral.size(); i++) {
       if (listOfFloral.get(i).getBookingReference().equals(bookingReference)) {
@@ -383,7 +397,7 @@ public class VenueHireSystem {
       }
     }
 
-    // INVOICE_CONTENT_VENUE_FEE("  * Venue hire - $%s"),
+    // Find the hire fee related to the venue code
     int bookingHireFee = 0;
     for (int i = 0; i < listOfVenues.size(); i++) {
       if (listOfVenues.get(i).getVenueCode().equals(bookingVenueCode)) {
@@ -392,6 +406,7 @@ public class VenueHireSystem {
       }
     }
 
+    // Print the total cost of the invoice
     MessageCli.INVOICE_CONTENT_BOTTOM_HALF.printMessage(
         Integer.toString(
             bookingHireFee + bookingCateringCost + bookingMusicCost + bookingFloralCost));

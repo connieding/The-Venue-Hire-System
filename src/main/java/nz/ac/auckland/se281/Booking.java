@@ -54,19 +54,23 @@ public class Booking {
   }
 
   public String getNextAvaliableDate() {
+    String avaliableDay = "";
+    String avaliableMonth = "";
+
+    // Increment the date by one day
     nextDay++;
+    // Check if the day is greater than 31, if so move to next month
     if (nextDay > 31) {
       nextDay = 1;
       nextMonth++;
+      // Check if the month is greater than 12, if so move to next year
       if (nextMonth > 12) {
         nextMonth = 1;
         nextYear++;
       }
     }
 
-    String avaliableDay = "";
-    String avaliableMonth = "";
-
+    // Format the date to be in the correct format
     if (nextDay < 10) {
       avaliableDay = "0" + nextDay;
     }
