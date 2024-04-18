@@ -307,6 +307,7 @@ public class VenueHireSystem {
             cateringType.getName(),
             cateringType.getCostPerPerson(),
             numberOfAttendees);
+    // Check if the booking with specific booking reference exists, if so add the catering service
     catering.checkBookingExists();
     catering.addService();
 
@@ -316,6 +317,7 @@ public class VenueHireSystem {
   public void addServiceMusic(String bookingReference) {
 
     Music music = new Music(listOfBookings, bookingReference, "Music");
+    // Check if the booking with specific booking reference exists, if so add the music service
     music.checkBookingExists();
     music.addService();
 
@@ -326,7 +328,7 @@ public class VenueHireSystem {
     Floral floral =
         new Floral(
             listOfBookings, bookingReference, "Floral", floralType.getName(), floralType.getCost());
-
+    // Check if the booking with specific booking reference exists, if so add the floral service.
     floral.checkBookingExists();
     floral.addService();
 
@@ -360,6 +362,23 @@ public class VenueHireSystem {
       }
     }
 
+    // Find the venue code related to the booking reference
+    String bookingVenueCode = "";
+    for (int i = 0; i < listOfBookings.size(); i++) {
+      if (listOfBookings.get(i).getBookingReference().equals(bookingReference)) {
+        bookingVenueCode = listOfBookings.get(i).getVenueCode();
+      }
+    }
+
+    // Find the hire fee related to the venue code
+    int bookingHireFee = 0;
+    for (int i = 0; i < listOfVenues.size(); i++) {
+      if (listOfVenues.get(i).getVenueCode().equals(bookingVenueCode)) {
+        bookingHireFee = listOfVenues.get(i).getHireFee();
+        MessageCli.INVOICE_CONTENT_VENUE_FEE.printMessage(Integer.toString(bookingHireFee));
+      }
+    }
+
     // Calculates the total cost of catering for specific booking reference
     int bookingCateringCost = 0;
     for (int i = 0; i < listOfCatering.size(); i++) {
@@ -386,23 +405,6 @@ public class VenueHireSystem {
         bookingFloralCost += listOfFloral.get(i).getFloralCost();
         MessageCli.INVOICE_CONTENT_FLORAL_ENTRY.printMessage(
             listOfFloral.get(i).getFloralName(), Integer.toString(bookingFloralCost));
-      }
-    }
-
-    // Find the venue code related to the booking reference
-    String bookingVenueCode = "";
-    for (int i = 0; i < listOfBookings.size(); i++) {
-      if (listOfBookings.get(i).getBookingReference().equals(bookingReference)) {
-        bookingVenueCode = listOfBookings.get(i).getVenueCode();
-      }
-    }
-
-    // Find the hire fee related to the venue code
-    int bookingHireFee = 0;
-    for (int i = 0; i < listOfVenues.size(); i++) {
-      if (listOfVenues.get(i).getVenueCode().equals(bookingVenueCode)) {
-        bookingHireFee = listOfVenues.get(i).getHireFee();
-        MessageCli.INVOICE_CONTENT_VENUE_FEE.printMessage(Integer.toString(bookingHireFee));
       }
     }
 
