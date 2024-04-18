@@ -8,11 +8,11 @@ public class Booking {
   private String dateOfBooking;
   private String avaliableDate;
   private String dateBooked;
+  private String customerEmail;
+  private String numberOfAttendees;
   private int nextDay;
   private int nextMonth;
   private int nextYear;
-  private String customerEmail;
-  private String numberOfAttendees;
 
   public Booking(
       String venueCode,

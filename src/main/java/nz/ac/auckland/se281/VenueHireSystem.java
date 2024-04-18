@@ -14,12 +14,11 @@ public class VenueHireSystem {
   private List<Floral> listOfFloral = new ArrayList<Floral>();
   private String[] numbers = {"two", "three", "four", "five", "six", "seven", "eight", "nine"};
   private String systemDate;
-  private boolean codeExists = false;
-  // private boolean bookingReferenceExists = false;
   private String nameOfVenue;
   private String bookingReference;
   private String numberOfAttendees;
   private String tempDate;
+  private boolean codeExists = false;
 
   public VenueHireSystem() {}
 
