@@ -8,7 +8,6 @@ public class Venue {
   private int hireFee;
 
   public Venue(String venueName, String venueCode, int capacityInput, int hireFeeInput) {
-    // put these in a list
     this.venueName = venueName;
     this.venueCode = venueCode;
     this.capacity = capacityInput;

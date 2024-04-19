@@ -21,6 +21,7 @@ public class Catering extends Services {
     this.serviceName = serviceName;
     this.costPerPerson = costPerPerson;
 
+    // Get the number of attendees for the booking
     for (Booking booking : listOfBookings) {
       if (booking.getBookingReference().equals(bookingReference)) {
         this.numberOfAttendees = booking.getNumberOfAttendees();
@@ -41,7 +42,7 @@ public class Catering extends Services {
   }
 
   @Override
-  public void addService() {
+  public void addService() { // Print specific catering service message when added
     if (bookingReferenceExists) {
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
           "Catering (" + this.serviceName + ")", this.bookingReference);

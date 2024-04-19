@@ -45,6 +45,7 @@ public class Booking {
 
   public String getNextAvaliableDate(String tempDate) {
 
+    // Split the date into day, month and year
     String[] dateParts = tempDate.split("/");
     int day = Integer.parseInt(dateParts[0]);
     int month = Integer.parseInt(dateParts[1]);

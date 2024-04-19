@@ -16,7 +16,7 @@ public class Music extends Services {
   }
 
   @Override
-  public void addService() {
+  public void addService() { // Print specific music service message when added
     if (bookingReferenceExists) {
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", this.bookingReference);
     }

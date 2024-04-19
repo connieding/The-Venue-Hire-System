@@ -11,6 +11,7 @@ public abstract class Services {
     this.bookingReference = bookingReference;
     this.serviceType = serviceType;
 
+    // Check if the booking reference exists
     for (Booking booking : listOfBookings) {
       if (booking.getBookingReference().equals(bookingReference)) {
         this.bookingReferenceExists = true;
@@ -18,6 +19,7 @@ public abstract class Services {
     }
   }
 
+  // Check if the booking exists before adding service
   public void checkBookingExists() {
     if (!bookingReferenceExists) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage(

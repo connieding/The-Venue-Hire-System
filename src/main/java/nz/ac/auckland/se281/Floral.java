@@ -32,7 +32,7 @@ public class Floral extends Services {
   }
 
   @Override
-  public void addService() {
+  public void addService() { // Print specific floral service message when added
     if (bookingReferenceExists) {
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
           "Floral (" + this.serviceName + ")", this.bookingReference);
