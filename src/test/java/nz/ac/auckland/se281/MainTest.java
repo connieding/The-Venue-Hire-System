@@ -16,7 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
   MainTest.Task1.class,
   MainTest.Task2.class,
   MainTest.Task3.class,
-  // MainTest.YourTests.class, // Uncomment this line to run your own tests
+  MainTest.YourTests.class, // Uncomment this line to run your own tests
 })
 public class MainTest {
 
@@ -1523,6 +1523,34 @@ public class MainTest {
 
       assertContains("Thank you for choosing 281 Venue Hire!");
       assertContains("For any inquiries, please contact support@281venuehire.co.nz.");
+    }
+
+    @Test
+    public void T5_13_invoice_details_no_booking_no_invoice() throws Exception {
+      runCommands(
+          unpack(
+              CREATE_TEN_VENUES,
+              SET_DATE,
+              "26/02/2024", //
+              VIEW_INVOICE,
+              "AAA"));
+
+      assertContains("Invoice not printed: there is no booking with reference");
+    }
+
+    @Test
+    public void T5_14_invoice_details_no_same_venue_reference() throws Exception {
+      runCommands(
+          unpack(
+              CREATE_TEN_VENUES,
+              SET_DATE,
+              "26/02/2024", //
+              MAKE_BOOKING,
+              options("GGG", "27/03/2024", "client001@email.com", "230"),
+              VIEW_INVOICE,
+              "AAA"));
+
+      assertContains("Invoice not printed: there is no booking with reference");
     }
   }
 
