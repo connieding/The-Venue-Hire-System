@@ -6,13 +6,9 @@ public class Booking {
   private String bookingReference;
   private String venueName;
   private String dateOfBooking;
-  private String avaliableDate;
   private String dateBooked;
   private String customerEmail;
   private String numberOfAttendees;
-  private int nextDay;
-  private int nextMonth;
-  private int nextYear;
 
   public Booking(
       String venueCode,
@@ -26,15 +22,9 @@ public class Booking {
     this.bookingReference = bookingReference;
     this.venueName = venueName;
     this.dateOfBooking = venueDate;
-    this.avaliableDate = venueDate;
     this.customerEmail = clientEmail;
     this.numberOfAttendees = venueAttendees;
     this.dateBooked = dateBooked;
-
-    String[] dateParts = venueDate.split("/");
-    this.nextDay = Integer.parseInt(dateParts[0]);
-    this.nextMonth = Integer.parseInt(dateParts[1]);
-    this.nextYear = Integer.parseInt(dateParts[2]);
   }
 
   public String getBookingDate() {
@@ -53,37 +43,44 @@ public class Booking {
     return this.bookingReference;
   }
 
-  public String getNextAvaliableDate() {
-    String avaliableDay = "";
-    String avaliableMonth = "";
+  public String getNextAvaliableDate(String tempDate) {
 
-    // Increment the date by one day
-    nextDay++;
-    // Check if the day is greater than 31, if so move to next month
-    if (nextDay > 31) {
-      nextDay = 1;
-      nextMonth++;
-      // Check if the month is greater than 12, if so move to next year
-      if (nextMonth > 12) {
-        nextMonth = 1;
-        nextYear++;
-      }
-    }
+    String[] dateParts = tempDate.split("/");
+    int day = Integer.parseInt(dateParts[0]);
+    int month = Integer.parseInt(dateParts[1]);
+    int year = Integer.parseInt(dateParts[2]);
 
-    // Format the date to be in the correct format
-    if (nextDay < 10) {
-      avaliableDay = "0" + nextDay;
-    }
-    if (nextMonth < 10) {
-      avaliableMonth = "0" + nextMonth;
-    }
-    if (nextDay >= 10 && nextMonth >= 10) {
-      avaliableDay = Integer.toString(nextDay);
-      avaliableMonth = Integer.toString(nextMonth);
-    }
+    String avaliableDay;
+    String avaliableMonth;
+    String nextAvaliableDate;
 
-    avaliableDate = avaliableDay + "/" + avaliableMonth + "/" + nextYear;
-    return avaliableDate;
+    // Checks if last day of the year
+    if (day == 31 && month == 12) {
+      return "01/01/" + Integer.toString(year + 1);
+
+      // checks if its a month with 28 days
+    } else if (day == 28 && month == 2) {
+      return "01/03/" + Integer.toString(year);
+
+      // Check if it is a month with only 30 days
+    } else if ((day == 30 & month == 4)
+        || (day == 30 & month == 6)
+        || (day == 30 & month == 9)
+        || (day == 30 & month == 11)) {
+      return "01/" + Integer.toString(month + 1) + "/" + Integer.toString(year);
+
+      // Checks if its the last day of the month
+    } else if (day == 31) {
+      return "01/" + Integer.toString(month + 1) + "/" + Integer.toString(year);
+
+    } else {
+      // Make correct format for the date
+      avaliableDay = String.format("%02d", day + 1);
+      avaliableMonth = String.format("%02d", month);
+      nextAvaliableDate = avaliableDay + "/" + avaliableMonth + "/" + year;
+
+      return nextAvaliableDate;
+    }
   }
 
   public String getClientEmail() {

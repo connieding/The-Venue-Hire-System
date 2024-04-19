@@ -15,7 +15,6 @@ public class VenueHireSystem {
   private String[] numbers = {"two", "three", "four", "five", "six", "seven", "eight", "nine"};
   private String systemDate;
   private String nameOfVenue;
-  private String bookingReference;
   private String tempDate;
   private boolean codeExists = false;
 
@@ -29,11 +28,11 @@ public class VenueHireSystem {
 
         MessageCli.NUMBER_VENUES.printMessage("is", "one", "");
 
-        tempDate = systemDate;
+        String tempDate = systemDate;
         for (Booking booking : listOfBookings) {
           if (booking.getBookingDate().equals(tempDate)
               && listOfVenues.get(0).getVenueCode().equals(booking.getVenueCode())) {
-            tempDate = booking.getNextAvaliableDate();
+            tempDate = booking.getNextAvaliableDate(tempDate);
           }
         }
 
@@ -54,7 +53,7 @@ public class VenueHireSystem {
           for (Booking booking : listOfBookings) {
             if (booking.getBookingDate().equals(tempDate)
                 && listOfVenues.get(i).getVenueCode().equals(booking.getVenueCode())) {
-              tempDate = booking.getNextAvaliableDate();
+              tempDate = booking.getNextAvaliableDate(tempDate);
             }
           }
           MessageCli.VENUE_ENTRY.printMessage(
@@ -74,8 +73,8 @@ public class VenueHireSystem {
           tempDate = systemDate;
           for (Booking booking : listOfBookings) {
             if (booking.getBookingDate().equals(tempDate)
-                && listOfVenues.get(i).getVenueCode().equals(booking.getVenueCode())) {
-              tempDate = booking.getNextAvaliableDate();
+                && (listOfVenues.get(i).getVenueCode()).equals(booking.getVenueCode())) {
+              tempDate = booking.getNextAvaliableDate(tempDate);
             }
           }
 
@@ -95,7 +94,7 @@ public class VenueHireSystem {
           for (Booking booking : listOfBookings) {
             if (booking.getBookingDate().equals(tempDate)
                 && listOfVenues.get(i).getVenueCode().equals(booking.getVenueCode())) {
-              tempDate = booking.getNextAvaliableDate();
+              tempDate = booking.getNextAvaliableDate(tempDate);
             }
           }
 
@@ -224,7 +223,6 @@ public class VenueHireSystem {
     String systemMonth = systemDateParts[1];
     String systemYear = systemDateParts[2];
 
-    // Check if the date for booking is in the past
     if (Integer.parseInt(venueYear) < Integer.parseInt(systemYear)
         || Integer.parseInt(venueYear) == Integer.parseInt(systemYear)
             && Integer.parseInt(venueMonth) < Integer.parseInt(systemMonth)
@@ -256,7 +254,7 @@ public class VenueHireSystem {
       }
     }
     // Successfully create booking
-    bookingReference = BookingReferenceGenerator.generateBookingReference();
+    String bookingReference = BookingReferenceGenerator.generateBookingReference();
     MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(
         bookingReference, nameOfVenue, options[1], numberOfAttendees);
     listOfBookings.add(
