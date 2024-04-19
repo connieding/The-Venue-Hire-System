@@ -16,7 +16,6 @@ public class VenueHireSystem {
   private String systemDate;
   private String nameOfVenue;
   private String bookingReference;
-  private String numberOfAttendees;
   private String tempDate;
   private boolean codeExists = false;
 
@@ -225,19 +224,19 @@ public class VenueHireSystem {
     String systemMonth = systemDateParts[1];
     String systemYear = systemDateParts[2];
 
-    if (Integer.parseInt(venueYear) < Integer.parseInt(systemYear)) {
-      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
-      return;
-    } else if (Integer.parseInt(venueMonth) < Integer.parseInt(systemMonth)) {
-      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
-      return;
-    } else if (Integer.parseInt(venueDay) < Integer.parseInt(systemDay)) {
+    // Check if the date for booking is in the past
+    if (Integer.parseInt(venueYear) < Integer.parseInt(systemYear)
+        || Integer.parseInt(venueYear) == Integer.parseInt(systemYear)
+            && Integer.parseInt(venueMonth) < Integer.parseInt(systemMonth)
+        || Integer.parseInt(venueYear) == Integer.parseInt(systemYear)
+            && Integer.parseInt(venueMonth) == Integer.parseInt(systemMonth)
+            && Integer.parseInt(venueDay) < Integer.parseInt(systemDay)) {
       MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
       return;
     }
 
     // check if number of attendees is greater than venue capacity
-    numberOfAttendees = options[3];
+    String numberOfAttendees = options[3];
     for (int i = 0; i < listOfVenues.size(); i++) {
       if (listOfVenues.get(i).getVenueCode().equals(options[0])) {
         if (Integer.parseInt(options[3]) > listOfVenues.get(i).getCapacity()) {
@@ -305,8 +304,7 @@ public class VenueHireSystem {
             bookingReference,
             "Catering",
             cateringType.getName(),
-            cateringType.getCostPerPerson(),
-            numberOfAttendees);
+            cateringType.getCostPerPerson());
     // Check if the booking with specific booking reference exists, if so add the catering service
     catering.checkBookingExists();
     catering.addService();

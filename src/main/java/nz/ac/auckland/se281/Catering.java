@@ -14,14 +14,18 @@ public class Catering extends Services {
       String bookingReference,
       String serviceType,
       String serviceName,
-      int costPerPerson,
-      String numberOfAttendees) {
+      int costPerPerson) {
     super(listOfBookings, bookingReference, serviceType);
 
     this.bookingReference = bookingReference;
     this.serviceName = serviceName;
     this.costPerPerson = costPerPerson;
-    this.numberOfAttendees = numberOfAttendees;
+
+    for (Booking booking : listOfBookings) {
+      if (booking.getBookingReference().equals(bookingReference)) {
+        this.numberOfAttendees = booking.getNumberOfAttendees();
+      }
+    }
   }
 
   public Object getBookingReference() {

@@ -1308,6 +1308,149 @@ public class MainTest {
               + " system.");
       assertDoesNotContain("Successfully added", true);
     }
+
+    @Test
+    public void T5_10_invoice_details_show_complete() throws Exception {
+      runCommands(
+          unpack(
+              CREATE_TEN_VENUES,
+              SET_DATE,
+              "19/04/2024", //
+              MAKE_BOOKING,
+              options(
+                  "TGB",
+                  "27/05/2024",
+                  "client001@email.com",
+                  "999"), // capacity is 150 so attendee reset to 150
+              ADD_CATERING,
+              "HUD14D8O",
+              options("LD"),
+              ADD_MUSIC,
+              "HUD14D8O", //
+              ADD_FLORAL,
+              "HUD14D8O",
+              options("y"),
+              VIEW_INVOICE,
+              "HUD14D8O"));
+
+      assertContains(
+          "Successfully created booking 'HUD14D8O' for 'Classy Celebration Venue' on 27/05/2024 for"
+              + " 150 people.");
+
+      assertContains(
+          "Successfully added Catering (Two Course Lunch/Dinner) service to booking 'HUD14D8O'.");
+      assertContains("Successfully added Music service to booking 'HUD14D8O'.");
+      assertContains("Successfully added Floral (Deluxe) service to booking 'HUD14D8O'.");
+
+      assertContains("INVOICE");
+      assertContains("===============================================================");
+      assertContains("-------------------------------------");
+      assertContains("Booking Reference: #HUD14D8O");
+      assertContains("Booking Details:");
+      assertContains("Customer Email: client001@email.com");
+      assertContains("Date of Booking: 19/04/2024");
+
+      assertContains("Event Details:");
+      assertContains("Party Date: 27/05/2024");
+      assertContains("Number of Guests: 150");
+      assertContains("Venue: Classy Celebration Venue");
+
+      assertContains("Cost Breakdown:");
+      assertContains("* Venue hire - $1000");
+      assertContains("* Catering (Two Course Lunch/Dinner) - $9000");
+      assertContains("* Floral (Deluxe) - $1000");
+      assertContains("* Music - $500");
+      assertContains("Total Amount: $11500");
+
+      assertContains("Thank you for choosing 281 Venue Hire!");
+      assertContains("For any inquiries, please contact support@281venuehire.co.nz.");
+    }
+
+    @Test
+    public void T5_11_invoice_details_show_complete_two() throws Exception {
+      runCommands(
+          unpack(
+              CREATE_TEN_VENUES,
+              SET_DATE,
+              "19/04/2024", //
+              MAKE_BOOKING,
+              options(
+                  "TGB",
+                  "27/05/2024",
+                  "client001@email.com",
+                  "999"), // capacity is 150 so attendee reset to 150
+              MAKE_BOOKING,
+              options(
+                  "CCEC",
+                  "12/09/2027",
+                  "client002@email.com",
+                  "10"), // change to 30 as capacity is 120,
+              ADD_CATERING,
+              "HUD14D8O",
+              options("LD"),
+              ADD_CATERING,
+              "ZP4HRCZ4",
+              options("X"),
+              ADD_MUSIC,
+              "HUD14D8O", //
+              ADD_FLORAL,
+              "HUD14D8O",
+              options("y"),
+              ADD_FLORAL,
+              "ZP4HRCZ4",
+              options("n"),
+              VIEW_INVOICE,
+              "HUD14D8O",
+              VIEW_INVOICE,
+              "ZP4HRCZ4"));
+
+      assertContains(
+          "Successfully created booking 'HUD14D8O' for 'Classy Celebration Venue' on 27/05/2024 for"
+              + " 150 people.");
+      assertContains(
+          "Successfully created booking 'ZP4HRCZ4' for 'Comfy Corner Events Centre' on 12/09/2027"
+              + " for 30 people.");
+
+      assertContains(
+          "Successfully added Catering (Two Course Lunch/Dinner) service to booking 'HUD14D8O'.");
+      assertContains("Successfully added Music service to booking 'HUD14D8O'.");
+      assertContains("Successfully added Floral (Deluxe) service to booking 'HUD14D8O'.");
+
+      assertContains("Successfully added Catering (Drinks) service to booking 'ZP4HRCZ4'.");
+
+      assertContains("INVOICE");
+      assertContains("===============================================================");
+      assertContains("-------------------------------------");
+      assertContains("Booking Reference: #HUD14D8O");
+      assertContains("Booking Reference: #ZP4HRCZ4");
+      assertContains("Booking Details:");
+      assertContains("Customer Email: client001@email.com");
+      assertContains("Customer Email: client002@email.com");
+      assertContains("Date of Booking: 19/04/2024");
+
+      assertContains("Event Details:");
+      assertContains("Party Date: 27/05/2024");
+      assertContains("Party Date: 12/09/2027");
+      assertContains("Number of Guests: 150");
+      assertContains("Number of Guests: 30");
+      assertContains("Venue: Classy Celebration Venue");
+      assertContains("Venue: Comfy Corner Events Centre");
+
+      assertContains("Cost Breakdown:");
+      assertContains("* Venue hire - $1000");
+      assertContains("* Catering (Two Course Lunch/Dinner) - $9000");
+      assertContains("* Floral (Deluxe) - $1000");
+      assertContains("* Music - $500");
+      assertContains("Total Amount: $11500");
+
+      assertContains("* Venue hire - $500");
+      assertContains("* Catering (Drinks) - $300");
+      assertContains("* Floral (Standard) - $550");
+      assertContains("Total Amount: $1350");
+
+      assertContains("Thank you for choosing 281 Venue Hire!");
+      assertContains("For any inquiries, please contact support@281venuehire.co.nz.");
+    }
   }
 
   private static final Object[] CREATE_NINE_VENUES =
