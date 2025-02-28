@@ -35,6 +35,6 @@ Follow the steps below to set up and run the project:
 
 Once the application is running, follow the on-screen instructions to reserve venues and manage various event services. The system features a command-line interface (CLI) for easy interaction, allowing users to:
 
-- **Book venues for their event dates.
-- **Add and customize catering services, floral arrangements, and music options.
-- **View and manage the details of their booked events.
+- Book venues for their event dates.
+- Add and customize catering services, floral arrangements, and music options.
+- View and manage the details of their booked events.
