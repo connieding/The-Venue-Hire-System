@@ -17,11 +17,11 @@ Follow the steps below to set up and run the project:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/the-venue-hire-system.git
+   git clone https://github.com/your-username/The-Venue-Hire-System.git
 
 2. **Navigate to the project directory**:
    ```bash   
-   cd the-venue-hire-system
+   cd The-Venue-Hire-System
    
 3. **Compile and Run the application**:
    ```bash  
