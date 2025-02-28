@@ -23,13 +23,9 @@ Follow the steps below to set up and run the project:
    ```bash   
    cd the-venue-hire-system
    
-3. **Compile the Java files**:
+3. **Compile and Run the application**:
    ```bash  
-   javac *.java
-
-4. **Run the main application**:
-   ```bash
-   java Main
+   .\mvnw.cmd compile exec:java@run
 
 ## Usage
 
