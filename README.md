@@ -1,6 +1,6 @@
 # The Venue Hire System
 
-The **The Venue Hire System** is a Java-based application designed to replicate the process of reserving venues for events. 
+**The Venue Hire System** is a Java-based application designed to replicate the process of reserving venues for events. 
 It allows users to easily book venues and enhance their events with additional services such as catering, floral arrangements, and music.
 
 ## Features
